@@ -15,9 +15,8 @@
 :root {
   --font-display: 'Cormorant Garamond', serif;
   --font-body: 'Jost', sans-serif;
-  --white: #FAFAF8;
   --dark: #0A0A0A;
-  --muted: rgba(255, 255, 255, 0.45);
+  --muted: rgba(0, 0, 0, 0.4);
 }
 
 /* ── Root Container ── */
@@ -26,11 +25,10 @@
   width: 100%;
   height: 100vh;
   min-height: 680px;
-  background-color: var(--bg, #0E0E0E);
-  color: var(--white);
+  background-color: #ffffff;
+  color: #1a1a1a;
   overflow: hidden;
   font-family: var(--font-body);
-  transition: background-color 0.9s ease;
 }
 
 /* ── Background Blob ── */
@@ -38,8 +36,8 @@
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    ellipse 60% 70% at 70% 50%,
-    color-mix(in srgb, var(--accent, #C8A96E) 12%, transparent),
+    ellipse 55% 65% at 72% 50%,
+    color-mix(in srgb, var(--accent, #C8A96E) 8%, transparent),
     transparent 70%
   );
   pointer-events: none;
@@ -73,7 +71,7 @@
   font-family: var(--font-display);
   font-size: 1.6rem;
   font-weight: 600;
-  color: var(--white);
+  color: #1a1a1a;
 }
 
 .logo-clothing {
@@ -101,7 +99,7 @@
 .hamburger span {
   display: block;
   height: 1px;
-  background: var(--white);
+  background: #1a1a1a;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
   transform-origin: center;
 }
@@ -151,7 +149,7 @@
   right: 3.5rem;
   background: none;
   border: none;
-  color: var(--white);
+  color: #fafaf8;
   font-size: 1.2rem;
   cursor: pointer;
   opacity: 0.6;
@@ -183,7 +181,7 @@
   align-items: baseline;
   gap: 1.2rem;
   text-decoration: none;
-  color: var(--white);
+  color: #fafaf8;
   font-family: var(--font-display);
   font-size: clamp(2.8rem, 5vw, 5.5rem);
   font-weight: 300;
@@ -214,7 +212,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--muted);
+  color: rgba(255,255,255,0.45);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   opacity: 0;
@@ -229,13 +227,13 @@
 }
 
 .nav-social a {
-  color: var(--muted);
+  color: rgba(255,255,255,0.45);
   text-decoration: none;
   font-size: 0.75rem;
   letter-spacing: 0.12em;
   transition: color 0.2s;
 }
-.nav-social a:hover { color: var(--white); }
+.nav-social a:hover { color: #fafaf8; }
 
 /* ══════════════════════════════════
    HERO MAIN LAYOUT
@@ -253,19 +251,19 @@
 }
 
 /* ══════════════════════════════════
-   TEXT BLOCK — slides in from RIGHT
+   TEXT BLOCK — slides in from LEFT (after image loads)
 ══════════════════════════════════ */
 .hero-text {
   display: flex;
   flex-direction: column;
   gap: 1.4rem;
-  animation: slideFromRight 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: slideFromLeft 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
 }
 
-@keyframes slideFromRight {
+@keyframes slideFromLeft {
   from {
     opacity: 0;
-    transform: translateX(80px);
+    transform: translateX(-80px);
   }
   to {
     opacity: 1;
@@ -282,7 +280,7 @@
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--accent, #C8A96E);
-  animation: slideFromRight 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+  animation: slideFromLeft 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
 }
 
 .tag-line {
@@ -300,21 +298,21 @@
   font-weight: 300;
   line-height: 1.0;
   letter-spacing: -0.01em;
-  color: var(--white);
+  color: #1a1a1a;
 }
 
 .headline-line {
   display: block;
   opacity: 0;
-  transform: translateX(60px);
-  animation: headlineLine 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-delay: calc(0.15s + var(--i, 0) * 0.12s);
+  transform: translateX(-60px);
+  animation: headlineLineLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(0.65s + var(--i, 0) * 0.12s);
 }
 
-@keyframes headlineLine {
+@keyframes headlineLineLeft {
   from {
     opacity: 0;
-    transform: translateX(60px);
+    transform: translateX(-60px);
   }
   to {
     opacity: 1;
@@ -331,10 +329,10 @@
   font-size: 0.88rem;
   font-weight: 300;
   line-height: 1.75;
-  color: var(--muted);
+  color: #666666;
   max-width: 380px;
   opacity: 0;
-  animation: slideFromRight 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.42s both;
+  animation: slideFromLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both;
 }
 
 .hero-actions {
@@ -343,7 +341,7 @@
   gap: 1.5rem;
   margin-top: 0.5rem;
   opacity: 0;
-  animation: slideFromRight 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+  animation: slideFromLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both;
 }
 
 .btn-primary {
@@ -357,19 +355,20 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .btn-primary:hover {
-  background: var(--white);
+  background: #1a1a1a;
+  color: #fff;
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
 }
 
 .btn-ghost {
   background: none;
   border: none;
-  color: var(--muted);
+  color: #888888;
   font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 300;
@@ -380,10 +379,10 @@
   transition: color 0.3s ease;
 }
 
-.btn-ghost:hover { color: var(--white); }
+.btn-ghost:hover { color: #1a1a1a; }
 
 /* ══════════════════════════════════
-   VISUAL BLOCK — slides in from RIGHT
+   VISUAL BLOCK — slides in from RIGHT first
 ══════════════════════════════════ */
 .hero-visual {
   position: relative;
@@ -391,13 +390,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: visualSlide 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  animation: visualSlide 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
 }
 
 @keyframes visualSlide {
   from {
     opacity: 0;
-    transform: translateX(100px);
+    transform: translateX(120px);
   }
   to {
     opacity: 1;
@@ -405,18 +404,31 @@
   }
 }
 
-/* ── Decorative Circle Behind Image ── */
+/* ── Decorative Circle — enters from right to left ── */
 .circle-bg {
   position: absolute;
   width: 68%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--accent, #C8A96E) 10%, transparent);
+  background: color-mix(in srgb, var(--accent, #C8A96E) 16%, transparent);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: circlePulse 6s ease-in-out infinite;
+  animation:
+    circleEnterRight 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both,
+    circlePulse 6s ease-in-out 1.5s infinite;
   transition: background 0.9s ease;
+}
+
+@keyframes circleEnterRight {
+  from {
+    opacity: 0;
+    transform: translate(60%, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }
 
 @keyframes circlePulse {
@@ -429,11 +441,13 @@
   width: 78%;
   aspect-ratio: 1;
   border-radius: 50%;
-  border: 1px solid color-mix(in srgb, var(--accent, #C8A96E) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent, #C8A96E) 30%, transparent);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: ringRotate 20s linear infinite;
+  animation:
+    circleEnterRight 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both,
+    ringRotate 20s linear 1.8s infinite;
   transition: border-color 0.9s ease;
 }
 
@@ -479,8 +493,8 @@
   inset: 0;
   background: linear-gradient(
     to bottom,
-    transparent 50%,
-    color-mix(in srgb, var(--bg, #0E0E0E) 40%, transparent) 100%
+    transparent 60%,
+    rgba(255, 255, 255, 0.25) 100%
   );
   transition: background 0.9s ease;
 }
@@ -500,19 +514,19 @@
 .badge-num {
   font-size: 3.5rem;
   font-weight: 300;
-  color: var(--white);
+  color: #2a2a2a;
   line-height: 1;
-  opacity: 0.9;
+  opacity: 0.7;
 }
 
 .badge-slash {
   font-size: 1rem;
-  color: var(--muted);
+  color: #aaaaaa;
 }
 
 .badge-total {
   font-size: 1rem;
-  color: var(--muted);
+  color: #aaaaaa;
 }
 
 /* ══════════════════════════════════
@@ -543,7 +557,7 @@
   padding: 0;
   width: 24px;
   height: 1px;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.18);
   transition: all 0.4s ease;
 }
 
@@ -557,7 +571,7 @@
   flex: 1;
   max-width: 240px;
   height: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   margin: 0 2rem;
   overflow: hidden;
   position: relative;
@@ -581,7 +595,7 @@
   display: flex;
   align-items: center;
   gap: 0.7rem;
-  color: var(--muted);
+  color: #aaaaaa;
   font-size: 0.65rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -590,7 +604,7 @@
 .scroll-line {
   width: 32px;
   height: 1px;
-  background: var(--muted);
+  background: #cccccc;
   position: relative;
   overflow: hidden;
 }
@@ -599,7 +613,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--white);
+  background: #1a1a1a;
   transform: translateX(-100%);
   animation: scrollLineAnim 2s ease-in-out infinite;
 }

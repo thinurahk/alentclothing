@@ -1,12 +1,13 @@
 "use client"
 import { useState, useEffect, useRef, useCallback } from "react";
 import "./app.css";
+import "./BrandSection.css";
 
 const slides = [
   {
     id: 1,
     tag: "New Collection",
-    headline: ["Crafted For", "The Bold"],
+    headline: ["FROM POSSIBILITIES ON PAPER TO", "FABRICS OF THE FUTURE"],
     subtext: "Premium fabrics. Timeless silhouettes. Made for those who lead.",
     cta: "Explore Now",
     image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=700&q=80",
@@ -16,7 +17,7 @@ const slides = [
   {
     id: 2,
     tag: "Signature Series",
-    headline: ["Elegance", "Redefined"],
+    headline: ["PRINTING THE FUTURE OF", "PERFORMANCE APPAREL."],
     subtext: "Where heritage meets contemporary edge. Wear the difference.",
     cta: "Shop the Series",
     image: "https://images.unsplash.com/photo-1594938298603-c8148c4b4e5b?w=700&q=80",
@@ -26,7 +27,7 @@ const slides = [
   {
     id: 3,
     tag: "Alent Originals",
-    headline: ["Dressed to", "Conquer"],
+    headline: ["DELIVERING SIGNATURE APPAREL TO", "EADING RETAILERS"],
     subtext: "Precision tailoring meets everyday luxury. Step into your story.",
     cta: "Discover More",
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80",
@@ -132,52 +133,19 @@ export default function HeroSection() {
               </span>
             ))}
           </h1>
-          <p className="hero-sub">{slide.subtext}</p>
-          <div className="hero-actions">
-            <button className="btn-primary">{slide.cta}</button>
-            <button className="btn-ghost">View Lookbook</button>
-          </div>
         </div>
 
         {/* Right: Image + Circle */}
         <div className="hero-visual" key={`visual-${current}`}>
           <div className="circle-bg" />
-          <div className="circle-ring" />
+          {/* <div className="circle-ring" /> */}
           <div className="hero-img-wrap">
             <img src={slide.image} alt="Collection" className="hero-img" />
             <div className="img-overlay" />
           </div>
-          <div className="float-badge">
-            <span className="badge-num">
-              {String(current + 1).padStart(2, "0")}
-            </span>
-            <span className="badge-slash">/</span>
-            <span className="badge-total">{String(slides.length).padStart(2, "0")}</span>
-          </div>
         </div>
       </main>
-
-      {/* ── Bottom Controls ── */}
-      <footer className="hero-footer">
-        <div className="slide-dots">
-          {slides.map((_, i) => (
-            <button
-              key={i}
-              className={`dot ${i === current ? "active" : ""}`}
-              onClick={() => goToSlide(i)}
-            />
-          ))}
-        </div>
-
-        <div className="progress-bar">
-          <div className="progress-fill" key={`prog-${current}`} />
-        </div>
-
-        <div className="scroll-hint">
-          <span>Scroll</span>
-          <div className="scroll-line" />
-        </div>
-      </footer>
+      
     </div>
   );
 }
