@@ -1,65 +1,183 @@
-import Image from "next/image";
+"use client"
+import { useState, useEffect, useRef, useCallback } from "react";
+import "./app.css";
 
-export default function Home() {
+const slides = [
+  {
+    id: 1,
+    tag: "New Collection",
+    headline: ["Crafted For", "The Bold"],
+    subtext: "Premium fabrics. Timeless silhouettes. Made for those who lead.",
+    cta: "Explore Now",
+    image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=700&q=80",
+    accent: "#C8A96E",
+    bg: "#0E0E0E",
+  },
+  {
+    id: 2,
+    tag: "Signature Series",
+    headline: ["Elegance", "Redefined"],
+    subtext: "Where heritage meets contemporary edge. Wear the difference.",
+    cta: "Shop the Series",
+    image: "https://images.unsplash.com/photo-1594938298603-c8148c4b4e5b?w=700&q=80",
+    accent: "#A8C4B8",
+    bg: "#111418",
+  },
+  {
+    id: 3,
+    tag: "Alent Originals",
+    headline: ["Dressed to", "Conquer"],
+    subtext: "Precision tailoring meets everyday luxury. Step into your story.",
+    cta: "Discover More",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80",
+    accent: "#D4A5A5",
+    bg: "#100E14",
+  },
+];
+
+const navLinks = ["Home", "Collections", "Men", "Women", "About", "Contact"];
+
+export default function HeroSection() {
+  const [current, setCurrent] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [prevSlide, setPrevSlide] = useState<number | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const goToSlide = (index: number) => {
+    if (animating || index === current) return;
+    setPrevSlide(current);
+    setAnimating(true);
+    setCurrent(index);
+    setTimeout(() => {
+      setAnimating(false);
+      setPrevSlide(null);
+    }, 900);
+  };
+
+  const nextSlide = useCallback(() => {
+    const next = (current + 1) % slides.length;
+    goToSlide(next);
+  }, [current, animating]);
+
+  useEffect(() => {
+    timerRef.current = setInterval(nextSlide, 5000);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [nextSlide]);
+
+  const slide = slides[current];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="hero-root" style={{ "--accent": slide.accent, "--bg": slide.bg } as React.CSSProperties}>
+      {/* ── Background gradient blob ── */}
+      <div className="hero-bg-blob" />
+
+      {/* ── Top Bar ── */}
+      <header className="hero-header">
+        <div className="hero-logo">
+          <span className="logo-alent">ALENT</span>
+          <span className="logo-clothing">CLOTHING</span>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <button
+          className={`hamburger ${menuOpen ? "open" : ""}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle navigation"
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </header>
+
+      {/* ── Full-Screen Nav Overlay ── */}
+      <nav className={`nav-overlay ${menuOpen ? "active" : ""}`}>
+        <button className="nav-close" onClick={() => setMenuOpen(false)}>
+          ✕
+        </button>
+        <ul className="nav-list">
+          {navLinks.map((link, i) => (
+            <li key={link} className="nav-item" style={{ "--delay": `${0.1 + i * 0.07}s` } as React.CSSProperties}>
+              <a href="#" onClick={() => setMenuOpen(false)}>
+                <span className="nav-num">0{i + 1}</span>
+                {link}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="nav-footer">
+          <span>© 2025 Alent Clothing</span>
+          <div className="nav-social">
+            <a href="#">IG</a>
+            <a href="#">FB</a>
+            <a href="#">TW</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* ── Hero Content ── */}
+      <main className="hero-main">
+        {/* Left: Text */}
+        <div className="hero-text" key={`text-${current}`}>
+          <p className="hero-tag">
+            <span className="tag-line" />
+            {slide.tag}
+          </p>
+          <h1 className="hero-headline">
+            {slide.headline.map((line, i) => (
+              <span key={i} className="headline-line" style={{ "--i": i } as React.CSSProperties}>
+                {line}
+              </span>
+            ))}
+          </h1>
+          <p className="hero-sub">{slide.subtext}</p>
+          <div className="hero-actions">
+            <button className="btn-primary">{slide.cta}</button>
+            <button className="btn-ghost">View Lookbook</button>
+          </div>
+        </div>
+
+        {/* Right: Image + Circle */}
+        <div className="hero-visual" key={`visual-${current}`}>
+          <div className="circle-bg" />
+          <div className="circle-ring" />
+          <div className="hero-img-wrap">
+            <img src={slide.image} alt="Collection" className="hero-img" />
+            <div className="img-overlay" />
+          </div>
+          <div className="float-badge">
+            <span className="badge-num">
+              {String(current + 1).padStart(2, "0")}
+            </span>
+            <span className="badge-slash">/</span>
+            <span className="badge-total">{String(slides.length).padStart(2, "0")}</span>
+          </div>
         </div>
       </main>
+
+      {/* ── Bottom Controls ── */}
+      <footer className="hero-footer">
+        <div className="slide-dots">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              className={`dot ${i === current ? "active" : ""}`}
+              onClick={() => goToSlide(i)}
+            />
+          ))}
+        </div>
+
+        <div className="progress-bar">
+          <div className="progress-fill" key={`prog-${current}`} />
+        </div>
+
+        <div className="scroll-hint">
+          <span>Scroll</span>
+          <div className="scroll-line" />
+        </div>
+      </footer>
     </div>
   );
 }
