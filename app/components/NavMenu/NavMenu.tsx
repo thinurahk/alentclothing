@@ -31,7 +31,11 @@ export default function NavMenu() {
     <>
       {/* ── Top bar with logo + trigger ── */}
       <header className="nav-topbar">
-        <div className="nav-logo">
+        <div 
+          className="nav-logo"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          style={{ cursor: "pointer" }}
+        >
           <span className="nav-logo-alent">ALENT</span>
           <span className="nav-logo-tag">FASHIONING POSSIBILITIES</span>
         </div>

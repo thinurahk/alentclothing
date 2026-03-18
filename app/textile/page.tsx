@@ -24,21 +24,44 @@ import imgp7 from "../../public/imgp7.jpg";
 import imgp5 from "../../public/imgp5.jpg";
 
 
-/* ── useInView hook ── */
-function useInView(threshold = 0.15) {
-  const ref = useRef<HTMLElement | null>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setVisible(true); },
-      { threshold }
-    );
-    if (ref.current) obs.observe(ref.current);
-    return () => obs.disconnect();
-  }, [threshold]);
-  return [ref, visible] as const;
-}
+import { motion, type Variants, useScroll, useTransform } from "motion/react";
+import { AuroraText } from "@/components/ui/aurora-text";
 
+const fadeUpVar: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const revealSectionVar: Variants = {
+  hidden: { 
+    opacity: 0, 
+    y: 120, 
+    scale: 0.92, 
+    borderTopLeftRadius: "12vw", 
+    borderTopRightRadius: "12vw"
+  },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1, 
+    borderTopLeftRadius: "0vw", 
+    borderTopRightRadius: "0vw",
+    transition: { 
+      duration: 1.2, 
+      ease: [0.22, 1, 0.36, 1] 
+    } 
+  }
+};
+
+const staggerContainer: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15
+    }
+  }
+};
 
 const items = [
     {
@@ -125,9 +148,10 @@ const brands = [
 
 /* ══════════════════════════════════════════════ */
 export default function TextilePage() {
-  const [statsRef,     statsVis]     = useInView();
-  const [highlightRef, highlightVis] = useInView();
-  const [brandsRef,    brandsVis]    = useInView();
+  const { scrollY } = useScroll();
+  const opacity = useTransform(scrollY, [0, 600], [1, 0.05]);
+  const scale = useTransform(scrollY, [0, 600], [1, 1.04]);
+  const y = useTransform(scrollY, [0, 600], [0, -30]);
 
   return (
     <>
@@ -135,20 +159,27 @@ export default function TextilePage() {
     <div className="tp-root">
 
       {/* ── 1. HERO ── */}
-      <section className="tp-hero">
+      <motion.section 
+        className="tp-hero"
+        style={{ position: 'sticky', top: 0, zIndex: 1, opacity, scale, y }}
+      >
         <img src={img17.src}
           alt="Textile hero" className="tp-hero-img" />
         <div className="tp-hero-overlay" />
         <div className="tp-hero-content">
           <p className="tp-eyebrow">OUR BUSINESSES</p>
-          <h1 className="tp-hero-title">Textile &amp;<br /><em>Apparel</em></h1>
+          <h1 className="tp-hero-title">Textile &amp;<br /><em><AuroraText>Apparel</AuroraText></em></h1>
           
         </div>
  
-      </section>
+      </motion.section>
 
+      <div style={{ position: "relative", zIndex: 2 }}>
       {/* ── 2. INTRO ── */}
-      <section className="tp-intro">
+      <motion.section 
+        className="tp-intro"
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={revealSectionVar}
+      >
         <div className="tp-intro-inner">
           <div className="tp-intro-label">
             <span className="tp-label-line" />
@@ -156,7 +187,7 @@ export default function TextilePage() {
           </div>
           <div className="tp-intro-body">
             <h2 className="tp-section-title dark">
-              From <em>Innovation</em> in fibre to<br />sustainability in fashion
+              From <em><AuroraText>Innovation</AuroraText></em> in fibre to<br />sustainability in fashion
             </h2>
             <p className="tp-body-text">
               Alent's Textile and Apparel division is one of the most integrated fabric-to-fashion
@@ -172,19 +203,22 @@ export default function TextilePage() {
             </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
 
 
       {/* ── 4. CAPABILITIES ── */}
-      <section className="tp-capabilities">
+      <motion.section 
+        className="tp-capabilities"
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={staggerContainer}
+      >
         <div className="tp-sec-header">
           <p className="tp-eyebrow-dark">WHAT WE DO</p>
           <h2 className="tp-section-title dark">Our <em>Capabilities</em></h2>
         </div>
         <div className="tp-cap-grid">
           {capabilities.map((cap) => (
-            <div className="tp-cap-card" key={cap.num}>
+            <motion.div className="tp-cap-card" key={cap.num} variants={fadeUpVar}>
               <img src={cap.image} alt={cap.title} className="tp-cap-img" />
               <div className="tp-cap-overlay" />
               <span className="tp-cap-num">{cap.num}</span>
@@ -198,12 +232,15 @@ export default function TextilePage() {
                   </svg>
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
-      </section>
+      </motion.section>
 
-       <section className="dd-section">
+       <motion.section 
+        className="dd-section"
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUpVar}
+       >
       <div className="dd-inner">
  
         {/* ── LEFT: Sticky title ── */}
@@ -243,14 +280,14 @@ export default function TextilePage() {
  
         </div>
       </div>
-    </section>
+    </motion.section>
 
      <DraggableCardContainer className="relative flex min-h-screen w-full items-center justify-center overflow-clip">
       <p className="absolute top-1/2 mx-auto max-w-sm -translate-y-3/4 text-center text-2xl font-black text-neutral-400 md:text-4xl dark:text-neutral-800">
 We are one of the leading manufacturer and supplier of Promotional T-Shirts in Sri Lanka .
 Whatever ideas you can imagine, talk to us! We'll do it.      </p>
-      {items.map((item) => (
-        <DraggableCardBody className={item.className}>
+      {items.map((item, index) => (
+        <DraggableCardBody key={index} className={item.className}>
           <img
             src={item.image}
             alt={item.title}
@@ -264,7 +301,10 @@ Whatever ideas you can imagine, talk to us! We'll do it.      </p>
     </DraggableCardContainer>
 
       {/* ── 6. SUSTAINABILITY BANNER ── */}
-      <section className="tp-banner">
+      <motion.section 
+        className="tp-banner"
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUpVar}
+      >
         <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1600&q=80"
           alt="Sustainability" className="tp-banner-img" />
         <div className="tp-banner-overlay" />
@@ -274,12 +314,15 @@ Whatever ideas you can imagine, talk to us! We'll do it.      </p>
           <p className="tp-banner-sub">100% renewable energy target by 2030. Zero liquid discharge across all plants.</p>
           <button className="tp-btn-solid">Read Our Sustainability Report</button>
         </div>
-      </section>
+      </motion.section>
 
 
 
       {/* ── 8. CTA ── */}
-      <section className="tp-cta">
+      <motion.section 
+        className="tp-cta"
+        initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={fadeUpVar}
+      >
         <div className="tp-cta-bg-letter" aria-hidden="true">A</div>
         <div className="tp-cta-inner">
           <h2 className="tp-cta-title">Ready to partner<br />with <em>Alent</em>?</h2>
@@ -288,10 +331,13 @@ Whatever ideas you can imagine, talk to us! We'll do it.      </p>
             <button className="tp-btn-solid">Get in Touch Now</button>
           </div>
         </div>
-      </section>
+      </motion.section>
 
+      </div>
     </div>
-    <Footer />
+    <div style={{ position: "relative", zIndex: 2 }}>
+      <Footer />
+    </div>
     </>
   );
 }

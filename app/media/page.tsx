@@ -4,7 +4,8 @@ import { useState } from "react";
 import NavMenu from "../components/NavMenu/NavMenu";
 import "./mediapge.css";
 import { VideoText } from "@/components/ui/video-text";
-import { SpinningText } from "@/components/ui/spinning-text"
+import { AuroraText } from "@/components/ui/aurora-text"
+
 import mm1 from "../../public/mm1.jpg";
 import mm2 from "../../public/mm2.jpg";
 import mm3 from "../../public/mm3.jpg";
@@ -119,6 +120,9 @@ export default function GalleryPage() {
             </div>
           ))}
         </div>
+        <h1 className="text-4xl font-bold tracking-tighter pl-150 pb-10 md:text-5xl lg:text-7xl">
+          Classic <AuroraText>Captures</AuroraText>
+        </h1>
       </main>
 
       {/* ── Lightbox ── */}
@@ -133,7 +137,7 @@ export default function GalleryPage() {
           </button>
 
           <div className="gp-lb-content" onClick={(e) => e.stopPropagation()}>
-            <img src={typeof lightbox.src === 'string' ? lightbox.src.replace("w=800", "w=1400") : lightbox.src.src} alt={lightbox.alt} className="gp-lb-img" />
+            <img src={typeof lightbox.src === 'string' ? (lightbox.src as string).replace("w=800", "w=1400") : lightbox.src.src} alt={lightbox.alt} className="gp-lb-img" />
           </div>
 
           <button className="gp-lb-nav gp-lb-next" onClick={(e) => { e.stopPropagation(); navigate(1); }} aria-label="Next">
@@ -145,8 +149,9 @@ export default function GalleryPage() {
           <div className="gp-lb-counter">
             {images.findIndex(i => i.id === lightbox.id) + 1} / {images.length}
           </div>
-
+  
         </div>
+        
       )}
     </>
   );
