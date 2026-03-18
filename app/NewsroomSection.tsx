@@ -1,4 +1,6 @@
 import "./NewsroomSection.css";
+import img14 from "../public/img14.jpg";
+import img15 from "../public/img15.jpg";
 
 const news = [
   {
@@ -14,7 +16,7 @@ const news = [
     title: "Walk for Rahula '26: Official Jersey",
     excerpt:
       "Proud manufacturing partners for Rahula College Matara. We delivered high-performance, custom-designed official jerseys that capture the dynamic spirit and pride of the 'Walk for Rahula 26' community milestone.",
-    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&q=80",
+    image: img14.src,
     size: "medium",
   },
   {
@@ -22,7 +24,7 @@ const news = [
     title: "Premium Promotional T-Shirts",
     excerpt:
       "Sri Lanka's trusted partner for premium promotional t-shirts. Whatever you envision for your brand, we have the expertise to make it happen.",
-    image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=900&q=80",
+    image: img15.src,
     size: "medium",
   },
 ];

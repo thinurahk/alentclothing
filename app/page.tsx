@@ -1,15 +1,30 @@
 "use client"
 import { useState, useEffect, useRef, useCallback } from "react";
 import "./app.css";
+import "./newNav.css";
 import "./BrandSection.css";
 import "./Spanningsection.css";
 import "./CSRSection.css"; // Not strictly needed here anymore, but keeping just in case
 import "./NewsroomSection.css";
 import "./Careerssection.css";
+import NavMenu from "./NavMenu";
 import Footer from "./Footer";
 import CSRSection from "./CSRSection";
 import NewsroomSection from "./NewsroomSection";
+import Contactform from "./Contactform";
 import CareersSection from "./CareersSection";
+import img1 from "../public/img1.png";
+import img2 from "../public/img2.png";
+import img3 from "../public/img3.png";
+import img4 from "../public/img4.png";
+import img5 from "../public/img5.png";
+import img6 from "../public/img6.avif";
+import img7 from "../public/img7.jpeg";
+import img8 from "../public/img8.jpg";
+import img9 from "../public/img9.jpg";
+import img10 from "../public/img10.jpg";
+import img11 from "../public/img11.jpg";
+import img12 from "../public/img12.jpg";
 
 const slides = [
   {
@@ -18,7 +33,7 @@ const slides = [
     headline: ["FROM POSSIBILITIES ON PAPER TO", "FABRICS OF THE FUTURE"],
     subtext: "Premium fabrics. Timeless silhouettes. Made for those who lead.",
     cta: "Explore Now",
-    image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=700&q=80",
+    image: img2,
     accent: "#C8A96E",
     bg: "#0E0E0E",
   },
@@ -28,28 +43,25 @@ const slides = [
     headline: ["PRINTING THE FUTURE OF", "PERFORMANCE APPAREL."],
     subtext: "Where heritage meets contemporary edge. Wear the difference.",
     cta: "Shop the Series",
-    image: "https://images.unsplash.com/photo-1594938298603-c8148c4b4e5b?w=700&q=80",
+    image: img1,
     accent: "#A8C4B8",
     bg: "#111418",
   },
   {
     id: 3,
     tag: "Alent Originals",
-    headline: ["DELIVERING SIGNATURE APPAREL TO", "EADING RETAILERS"],
+    headline: ["DELIVERING SIGNATURE APPAREL TO", "LEADING RETAILERS"],
     subtext: "Precision tailoring meets everyday luxury. Step into your story.",
     cta: "Discover More",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80",
+    image: img5,
     accent: "#D4A5A5",
     bg: "#100E14",
   },
 ];
 
-const navLinks = ["Home", "Collections", "Men", "Women", "About", "Contact"];
-
 export default function HeroSection() {
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [prevSlide, setPrevSlide] = useState<number | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -163,31 +175,32 @@ export default function HeroSection() {
       num: "01",
       title: "Textile and Apparel",
       desc: "From innovation in fibre to sustainability in fashion, Alent is powering high-fashion brands across Sri Lanka, all the while delivering unmatched quality and excellence across the garment value chain.",
-      image: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=800&q=80",
+      image: img8,
     },
     {
       num: "02",
-      title: "Retail",
+      title: "Anjas-Retail",
       desc: "Our retail stores deliver a premium shopping experience for men and women, combining Alent's finest offerings under one roof — featuring a full range of shirting, suiting fabrics, and super-premium products.",
-      image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=800&q=80",
+      image: img12,
     },
     {
       num: "03",
       title: "Media & news company",
       desc: "Our in-house design studio blends global trends with local sensibilities, crafting collections that speak to the modern wardrobe. Every stitch is a statement, every fabric a canvas of creativity.",
-      image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+      image: img7,
     },
     {
       num: "04",
       title: "IT Solutions",
       desc: "From initial business consulting to scalable cloud architecture, Alent IT is powering the digital backbone of companies across Sri Lanka. We deliver unmatched data security and operational excellence across the entire technology lifecycle..",
-      image: "https://unsplash.com/photos/man-typing-on-keyboard-in-front-of-multiple-computer-monitors-Nm_hDwuVtcw",
+      image: img11,
     }
   ];
 
 
   return (
     <>
+    <NavMenu />
     <div
       className="hero-root"
       ref={heroRef}
@@ -202,49 +215,6 @@ export default function HeroSection() {
     >
       {/* ── Background gradient blob ── */}
       <div className="hero-bg-blob" />
-
-      {/* ── Top Bar ── */}
-      <header className="hero-header">
-        <div className="hero-logo">
-          <span className="logo-alent">ALENT</span>
-          <span className="logo-clothing">CLOTHING</span>
-        </div>
-
-        <button
-          className={`hamburger ${menuOpen ? "open" : ""}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle navigation"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </header>
-
-      {/* ── Full-Screen Nav Overlay ── */}
-      <nav className={`nav-overlay ${menuOpen ? "active" : ""}`}>
-        <button className="nav-close" onClick={() => setMenuOpen(false)}>
-          ✕
-        </button>
-        <ul className="nav-list">
-          {navLinks.map((link, i) => (
-            <li key={link} className="nav-item" style={{ "--delay": `${0.1 + i * 0.07}s` } as React.CSSProperties}>
-              <a href="#" onClick={() => setMenuOpen(false)}>
-                <span className="nav-num">0{i + 1}</span>
-                {link}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div className="nav-footer">
-          <span>© 2025 Alent Clothing</span>
-          <div className="nav-social">
-            <a href="#">IG</a>
-            <a href="#">FB</a>
-            <a href="#">TW</a>
-          </div>
-        </div>
-      </nav>
 
       {/* ── Hero Content ── */}
       <main className="hero-main">
@@ -268,7 +238,7 @@ export default function HeroSection() {
           <div className="circle-bg" />
           {/* <div className="circle-ring" /> */}
           <div className="hero-img-wrap">
-            <img src={slide.image} alt="Collection" className="hero-img" />
+            <img src={typeof slide.image === 'string' ? slide.image : slide.image.src} alt="Collection" className="hero-img" />
             <div className="img-overlay" />
           </div>
         </div>
@@ -335,7 +305,7 @@ export default function HeroSection() {
                 key={card.num}
               >
                 <img
-                  src={card.image}
+                  src={typeof card.image === 'string' ? card.image : card.image.src}
                   alt={card.title}
                   className="card-img"
                   style={i === activeCard ? { transform: `scale(${cardImgScale})` } : undefined}
@@ -389,6 +359,8 @@ export default function HeroSection() {
       <NewsroomSection />
       {/* ══ CAREERS SECTION ══ */}
       <CareersSection />
+
+      <Contactform />
       <Footer />
     </> 
   );

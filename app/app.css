@@ -1,9 +1,8 @@
 /* ══════════════════════════════════════════
    ALENT CLOTHING — HERO SECTION
-   Inspired by Arvind.com editorial style
 ══════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&family=Barlow+Condensed:wght@200;300;400;500;600;700;800&display=swap');
 
 /* ── Reset & Root ── */
 *, *::before, *::after {
@@ -13,7 +12,8 @@
 }
 
 :root {
-  --font-display: 'Cormorant Garamond', serif;
+  --font-display: 'Barlow Condensed', 'Cormorant Garamond', serif;
+  --font-headline: 'Barlow Condensed', sans-serif;
   --font-body: 'Jost', sans-serif;
   --dark: #0A0A0A;
   --muted: rgba(0, 0, 0, 0.4);
@@ -44,196 +44,6 @@
   transition: background 0.9s ease;
   z-index: 0;
 }
-
-/* ══════════════════════════════════
-   HEADER
-══════════════════════════════════ */
-.hero-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 3.5rem;
-}
-
-.hero-logo {
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-  letter-spacing: 0.18em;
-}
-
-.logo-alent {
-  font-family: var(--font-display);
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #1a1a1a;
-}
-
-.logo-clothing {
-  font-family: var(--font-body);
-  font-size: 0.55rem;
-  font-weight: 300;
-  letter-spacing: 0.38em;
-  color: var(--accent, #C8A96E);
-  margin-top: 1px;
-}
-
-/* ── Hamburger ── */
-.hamburger {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  z-index: 200;
-  position: relative;
-}
-
-.hamburger span {
-  display: block;
-  height: 1px;
-  background: #1a1a1a;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  transform-origin: center;
-}
-
-.hamburger span:nth-child(1) { width: 28px; }
-.hamburger span:nth-child(2) { width: 20px; margin-left: auto; }
-.hamburger span:nth-child(3) { width: 28px; }
-
-.hamburger.open span:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
-  width: 28px;
-}
-.hamburger.open span:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
-.hamburger.open span:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-  width: 28px;
-}
-
-/* ══════════════════════════════════
-   NAV OVERLAY
-══════════════════════════════════ */
-.nav-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 150;
-  background: #080808;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 3rem 5rem;
-  clip-path: circle(0% at calc(100% - 60px) 48px);
-  transition: clip-path 0.75s cubic-bezier(0.77, 0, 0.175, 1);
-  pointer-events: none;
-}
-
-.nav-overlay.active {
-  clip-path: circle(150% at calc(100% - 60px) 48px);
-  pointer-events: all;
-}
-
-.nav-close {
-  position: absolute;
-  top: 2rem;
-  right: 3.5rem;
-  background: none;
-  border: none;
-  color: #fafaf8;
-  font-size: 1.2rem;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.2s;
-}
-.nav-close:hover { opacity: 1; }
-
-.nav-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.nav-item {
-  overflow: hidden;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.5s ease var(--delay, 0s), transform 0.5s ease var(--delay, 0s);
-}
-
-.nav-overlay.active .nav-item {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.nav-item a {
-  display: flex;
-  align-items: baseline;
-  gap: 1.2rem;
-  text-decoration: none;
-  color: #fafaf8;
-  font-family: var(--font-display);
-  font-size: clamp(2.8rem, 5vw, 5.5rem);
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  transition: color 0.3s ease, letter-spacing 0.3s ease;
-}
-
-.nav-item a:hover {
-  color: var(--accent, #C8A96E);
-  letter-spacing: 0.04em;
-}
-
-.nav-num {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 300;
-  color: var(--accent, #C8A96E);
-  letter-spacing: 0.1em;
-  margin-bottom: 4px;
-}
-
-.nav-footer {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 5rem;
-  right: 5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: rgba(255,255,255,0.45);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  opacity: 0;
-  transition: opacity 0.5s ease 0.6s;
-}
-
-.nav-overlay.active .nav-footer { opacity: 1; }
-
-.nav-social {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-social a {
-  color: rgba(255,255,255,0.45);
-  text-decoration: none;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  transition: color 0.2s;
-}
-.nav-social a:hover { color: #fafaf8; }
 
 /* ══════════════════════════════════
    HERO MAIN LAYOUT
@@ -293,12 +103,13 @@
 .hero-headline {
   display: flex;
   flex-direction: column;
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 5.5vw, 6.5rem);
-  font-weight: 300;
-  line-height: 1.0;
+  font-family: var(--font-headline);
+  font-size: clamp(2.8rem, 5.8vw, 6rem);
+  font-weight: 100;
+  line-height: 0.95;
   letter-spacing: -0.01em;
   color: #1a1a1a;
+  text-transform: uppercase;
 }
 
 .headline-line {
@@ -307,6 +118,17 @@
   transform: translateX(-60px);
   animation: headlineLineLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(0.65s + var(--i, 0) * 0.12s);
+}
+
+/* Alternating weight: even lines are bold, odd lines are light */
+.headline-line:nth-child(odd) {
+  font-weight: 200;
+  color: #747373;
+}
+
+.headline-line:nth-child(even) {
+  font-weight: 500;
+  color: #292929;
 }
 
 @keyframes headlineLineLeft {
@@ -318,11 +140,6 @@
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-.headline-line:last-child {
-  font-style: italic;
-  color: var(--accent, #C8A96E);
 }
 
 .hero-sub {
@@ -410,7 +227,7 @@
   width: 68%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--accent, #C8A96E) 16%, transparent);
+  background: color-mix(in srgb, var(--accent, #871515) 100%, transparent);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -473,15 +290,16 @@
 .hero-img-wrap {
   position: relative;
   z-index: 2;
-  width: 54%;
+  width: 100%;
   height: 88%;
   overflow: hidden;
 }
 
 .hero-img {
+  padding-top: 100px;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: top center;
   display: block;
   filter: grayscale(8%);
@@ -645,7 +463,7 @@
   }
 
   .hero-headline {
-    font-size: clamp(2.4rem, 8vw, 4rem);
+    font-size: clamp(2rem, 7vw, 3.5rem);
   }
 
   .hero-header {

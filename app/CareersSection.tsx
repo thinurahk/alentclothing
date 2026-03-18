@@ -1,4 +1,5 @@
 import "./Careerssection.css";
+import img16 from "../public/img16.jpg";
 
 export default function CareersSection() {
   return (
@@ -6,7 +7,7 @@ export default function CareersSection() {
       <div className="careers-card">
         {/* South-Asian team photo from Unsplash */}
         <img
-          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=80"
+          src={img16.src}
           alt="South Asian professional team"
           className="careers-img"
         />

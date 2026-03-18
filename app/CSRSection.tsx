@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from "react";
 import "./CSRSection.css";
+import img13 from "../public/img13.jpg";
 
 const csrSlides = [
   {
@@ -42,7 +43,7 @@ const csrSlides = [
       { label: "goal to train", value: "100+", sub: "women in vocational and leadership skills" },
       { label: "targeting over", value: "70% retention", sub: "in future self-help groups" },
     ],
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1400&q=80",
+    image: img13.src,
   }
 ];
 

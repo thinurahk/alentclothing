@@ -1,0 +1,338 @@
+/* ══════════════════════════════════════════════
+   ALENT — CONTACT FORM
+   Light theme matching site aesthetic, centered
+══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap');
+
+/* ── Outer wrapper ── */
+.cf-wrap {
+  width: 100%;
+  max-width: 580px;
+  background: #ffffff;
+  padding: 3.5rem 2.5rem 4rem;
+  box-sizing: border-box;
+  font-family: 'Jost', sans-serif;
+  color: #333333;
+  margin: 5rem auto; /* Centers the form block horizontally */
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+/* ══════════════════════════════════
+   HEADING
+══════════════════════════════════ */
+.cf-heading {
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #2a2a2a;
+  margin: 0 0 2rem;
+  text-align: center; /* Centered heading */
+}
+
+/* ══════════════════════════════════
+   FORM
+══════════════════════════════════ */
+.cf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+/* ── Field wrapper ── */
+.cf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* ── Input / Textarea base ── */
+.cf-input,
+.cf-textarea {
+  width: 100%;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #333;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  resize: none;
+}
+
+.cf-input::placeholder,
+.cf-textarea::placeholder {
+  color: #999;
+  font-weight: 300;
+}
+
+.cf-input:focus,
+.cf-textarea:focus {
+  border-color: #C0392B;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.08);
+}
+
+/* Error state */
+.has-error .cf-input,
+.has-error .cf-textarea {
+  border-color: #e74c3c;
+}
+
+.cf-error {
+  font-size: 0.72rem;
+  color: #e74c3c;
+  letter-spacing: 0.02em;
+  padding-left: 4px;
+}
+
+/* ══════════════════════════════════
+   PRIVACY CHECKBOX
+══════════════════════════════════ */
+.cf-checkbox-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.cf-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  cursor: pointer;
+}
+
+/* Hide native checkbox */
+.cf-checkbox-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Custom checkbox box */
+.cf-checkbox-box {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  border: 1.5px solid #bbb;
+  background: #fff;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.cf-checkbox-input:checked + .cf-checkbox-box {
+  border-color: #C0392B;
+  background: #C0392B;
+}
+
+.cf-checkbox-box svg {
+  width: 11px;
+  height: 11px;
+  stroke: #fff;
+}
+
+.cf-checkbox-text {
+  font-size: 0.82rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #666;
+}
+
+.cf-privacy-link {
+  color: #C0392B;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s;
+}
+.cf-privacy-link:hover { opacity: 0.75; }
+
+/* ══════════════════════════════════
+   reCAPTCHA MOCK
+══════════════════════════════════ */
+.cf-recaptcha {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.cf-captcha-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  width: fit-content;
+  min-width: 280px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  user-select: none;
+}
+
+.cf-captcha-box:hover {
+  border-color: #ccc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+/* Checkbox inside captcha */
+.cf-captcha-check {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #ccc;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+  border-radius: 3px;
+}
+
+.cf-captcha-check.checked {
+  border-color: #4CAF50;
+  background: #fff;
+}
+
+.cf-captcha-check svg {
+  width: 16px;
+  height: 16px;
+}
+
+.cf-captcha-text {
+  font-size: 0.88rem;
+  font-weight: 400;
+  color: #444;
+  flex: 1;
+}
+
+/* reCAPTCHA branding block */
+.cf-captcha-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  margin-left: auto;
+}
+
+.cf-captcha-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.cf-captcha-brand {
+  font-size: 0.55rem;
+  font-weight: 500;
+  color: #888;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.cf-captcha-links {
+  font-size: 0.5rem;
+  color: #888;
+  letter-spacing: 0.02em;
+}
+
+/* ══════════════════════════════════
+   SUBMIT BUTTON
+══════════════════════════════════ */
+.cf-submit {
+  align-self: center; /* Center submit button */
+  background: #C0392B;
+  color: #fff;
+  border: none;
+  padding: 0.9rem 2.5rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 1rem;
+  transition: background 0.25s ease, transform 0.15s ease, box-shadow 0.25s ease;
+}
+
+.cf-submit:hover {
+  background: #a93226;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(192, 57, 43, 0.25);
+}
+
+.cf-submit:active {
+  transform: translateY(0);
+}
+
+/* ══════════════════════════════════
+   SUCCESS STATE
+══════════════════════════════════ */
+.cf-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  padding: 4rem 1rem;
+  text-align: center;
+  min-height: 300px;
+}
+
+.cf-success svg {
+  width: 60px;
+  height: 60px;
+  stroke: #4CAF50;
+}
+
+.cf-success h3 {
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #2a2a2a;
+  letter-spacing: 0.04em;
+}
+
+.cf-success p {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 600px) {
+  .cf-wrap {
+    margin: 3rem auto;
+    width: 90%;
+    padding: 2.5rem 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cf-wrap {
+    padding: 2rem 1.4rem;
+  }
+
+  .cf-heading {
+    font-size: 1.25rem;
+  }
+
+  .cf-captcha-box {
+    min-width: 100%;
+  }
+}
