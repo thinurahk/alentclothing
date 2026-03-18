@@ -2,6 +2,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import "./app.css";
 import "./BrandSection.css";
+import "./SpanningSection.css";
+
 
 const slides = [
   {
@@ -70,8 +72,79 @@ export default function HeroSection() {
 
   const slide = slides[current];
 
+  // ── Rotating word list for the animated highlight ──
+  const rotatingWords = [
+    { text: "Fashioning Possibilities", color: "var(--blue-accent)" },
+    { text: "Defining Style",           color: "var(--red-accent)"  },
+    { text: "Crafting Heritage",        color: "var(--blue-accent)" },
+    { text: "Wearing Confidence",       color: "var(--red-accent)"  },
+  ];
+
+  const [wordIndex, setWordIndex] = useState(0);
+  const [exiting, setExiting]     = useState(false);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const heroRef    = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible]     = useState(false);
+  const [heroStyle, setHeroStyle] = useState({ opacity: 1, transform: "scale(1) translateY(0px)" });
+
+  // ── Auto-rotate words every 3 s ──
+  useEffect(() => {
+    const id = setInterval(() => {
+      setExiting(true);
+      setTimeout(() => {
+        setWordIndex(i => (i + 1) % rotatingWords.length);
+        setExiting(false);
+      }, 420);
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
+
+  // ── Intersection observer for brand section scroll-in ──
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true); },
+      { threshold: 0.2 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // ── Scroll-driven hero fade-out + scale-up ──
+  useEffect(() => {
+    const onScroll = () => {
+      const scrollY = window.scrollY;
+      const vh = window.innerHeight;
+      // Start fading after 5% scroll, complete at 60% of viewport height
+      const progress = Math.min(Math.max(scrollY / (vh * 0.6), 0), 1);
+      const opacity  = 1 - progress * 0.95;
+      const scale    = 1 + progress * 0.04;
+      const translateY = -(progress * 30);
+      setHeroStyle({
+        opacity,
+        transform: `scale(${scale}) translateY(${translateY}px)`,
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const activeWord = rotatingWords[wordIndex];
+ 
+
   return (
-    <div className="hero-root" style={{ "--accent": slide.accent, "--bg": slide.bg } as React.CSSProperties}>
+    <>
+    <div
+      className="hero-root"
+      ref={heroRef}
+      style={{
+        "--accent": slide.accent,
+        "--bg": slide.bg,
+        ...heroStyle,
+        position: "sticky",
+        top: 0,
+        zIndex: 1,
+      } as React.CSSProperties}
+    >
       {/* ── Background gradient blob ── */}
       <div className="hero-bg-blob" />
 
@@ -145,7 +218,48 @@ export default function HeroSection() {
           </div>
         </div>
       </main>
-      
     </div>
+
+         <section className={`brand-section ${visible ? "in-view" : ""}`} ref={sectionRef}>
+ 
+      {/* ── Giant background letter ── */}
+      <div className="bg-letter" aria-hidden="true">A</div> 
+      {/* ── Main text block ── */}
+      <div className="brand-content">
+ 
+        <p className="brand-statement">
+          <span className="line-plain">We are </span>
+          <span
+            className={`line-rotating ${exiting ? "exit" : "enter"}`}
+            style={{ color: activeWord.color }}
+          >
+            {activeWord.text}
+          </span>
+          <br />
+          <span className="line-plain">
+            with every thread we weave,
+            <br />every idea we shape, and
+            <br />every future we imagine
+            <br />together. Welcome to{" "}
+          </span>
+          <span className="brand-name">Alent.</span>
+        </p>
+ 
+        {/* ── Circle arrow CTA ── */}
+        <button className="circle-arrow" aria-label="Learn more">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M10 8l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+ 
+      {/* ── Subtle bottom scroll indicator ── */}
+      <div className="brand-scroll-hint">
+        <span className="scroll-line-h" />
+        <span className="scroll-label">Scroll to explore</span>
+      </div>
+    </section>
+  </>  
   );
 }
