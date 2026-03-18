@@ -1,0 +1,75 @@
+import "./NewsroomSection.css";
+
+const news = [
+  {
+    id: 1,
+    title: "ALENT 2026 Spring Summer Collection",
+    excerpt:
+      "ALENT 26 embodies versatile denim for Spring/Summer '26, blending dynamic energy with the season's top trends. Each piece offers casual comfort, active wearability, holiday ease, and bold style.",
+    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=900&q=80",
+    size: "large",
+  },
+  {
+    id: 2,
+    title: "Walk for Rahula '26: Official Jersey",
+    excerpt:
+      "Proud manufacturing partners for Rahula College Matara. We delivered high-performance, custom-designed official jerseys that capture the dynamic spirit and pride of the 'Walk for Rahula 26' community milestone.",
+    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&q=80",
+    size: "medium",
+  },
+  {
+    id: 3,
+    title: "Premium Promotional T-Shirts",
+    excerpt:
+      "Sri Lanka's trusted partner for premium promotional t-shirts. Whatever you envision for your brand, we have the expertise to make it happen.",
+    image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=900&q=80",
+    size: "medium",
+  },
+];
+
+export default function NewsroomSection() {
+  return (
+    <section className="newsroom-section">
+      {/* ── Header ── */}
+      <div className="newsroom-header">
+        <div className="newsroom-header-left">
+          <p className="newsroom-eyebrow">UPDATES</p>
+          <h2 className="newsroom-title">Newsroom</h2>
+        </div>
+        <div className="newsroom-header-right">
+          <button className="view-all-btn">view all updates</button>
+        </div>
+      </div>
+
+      {/* ── Cards Grid ── */}
+      <div className="newsroom-grid">
+        {news.map((item) => (
+          <div className={`news-card news-card--${item.size}`} key={item.id}>
+            {/* Background Image */}
+            <img src={item.image} alt={item.title} className="news-img" />
+
+            {/* Dark overlay */}
+            <div className="news-overlay" />
+
+            {/* Content */}
+            <div className="news-body">
+              <h3 className="news-title">{item.title}</h3>
+              <p className="news-excerpt">{item.excerpt}</p>
+              <button className="news-arrow" aria-label="Read more">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M10 8l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Mobile view all ── */}
+      <div className="newsroom-footer-mobile">
+        <button className="view-all-btn">view all updates</button>
+      </div>
+    </section>
+  );
+}

@@ -22,17 +22,6 @@ const footerLinks = [
     ],
   },
   {
-    heading: "INVESTORS",
-    links: [
-      "Financial Reports",
-      "Policies",
-      "Shareholders Corner",
-      "Scheme of Arrangement",
-      "Credit Ratings",
-      "Disclosure",
-    ],
-  },
-  {
     heading: "SUSTAINABILITY",
     links: ["Environment", "Social", "Governance", "Resource Centre"],
     subSections: [
@@ -55,11 +44,11 @@ const footerLinks = [
       "Diversity, Equity and Inclusion",
       "Current Openings",
     ],
-    subSections: [
-      { heading: "CONTACT US",    links: [] },
-      { heading: "PRIVACY POLICY", links: [] },
-      { heading: "COOKIE POLICY",  links: [] },
-    ],
+    // subSections: [
+    //   { heading: "CONTACT US",    links: [] },
+    //   { heading: "PRIVACY POLICY", links: [] },
+    //   { heading: "COOKIE POLICY",  links: [] },
+    // ],
   },
 ];
 
@@ -76,7 +65,7 @@ const socials = [
   },
   {
     label: "Facebook",
-    href: "#",
+    href: "https://web.facebook.com/profile.php?id=100081833229784",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor">
         <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
@@ -94,7 +83,7 @@ const socials = [
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/mediaalent/",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -105,7 +94,7 @@ const socials = [
   },
   {
     label: "YouTube",
-    href: "#",
+    href: "https://www.youtube.com/@Mediaalent",
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor">
         <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z" />
@@ -126,13 +115,6 @@ export default function Footer() {
           <div className="footer-logo">
             <span className="footer-logo-alent">ALENT</span>
             <span className="footer-logo-tag">FASHIONING POSSIBILITIES</span>
-          </div>
-
-          {/* Stock */}
-          <div className="footer-stock">
-            <span>NSE</span>
-            <span className="stock-divider">|</span>
-            <span>BSE</span>
           </div>
 
           {/* Social */}
@@ -180,11 +162,10 @@ export default function Footer() {
         <div className="footer-hq">
           <p className="footer-col-heading">HEADQUARTERS</p>
           <p className="footer-hq-address">
-            Colombo 03, Near Galle Face Hotel,<br />
-            Colombo – 00300, Sri Lanka.
+            Matara, Sri Lanka.
           </p>
-          <p className="footer-hq-tel">Tel: +94 11 234 5678</p>
-
+          <p className="footer-hq-tel">Tel: +94 71 235 9109</p>
+          <p className="footer-hq-tel">Email: alent@gmail.com</p>
           <p className="footer-col-heading footer-col-heading--sub footer-group-sites">
             OUR GROUP WEBSITES
           </p>
