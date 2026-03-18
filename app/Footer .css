@@ -1,0 +1,296 @@
+/* ══════════════════════════════════════════════
+   ALENT — FOOTER
+   Matches Arvind.com multi-column footer style
+══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@200;300;400;500&display=swap');
+
+:root {
+  --red-accent  : #C0392B;
+  --footer-bg   : #EAEAEA;
+  --footer-text : #3a3a3a;
+  --footer-muted: #777;
+  --footer-head : #2a2a2a;
+}
+
+/* ── Shell ── */
+.footer {
+  width: 100%;
+  background: var(--footer-bg);
+  font-family: 'Jost', sans-serif;
+  color: var(--footer-text);
+  padding: 3.5rem clamp(1.5rem, 5vw, 4rem) 0;
+  box-sizing: border-box;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+/* ── Inner flex row ── */
+.footer-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.4rem;
+}
+
+/* ══════════════════════════════════
+   BRAND COLUMN (left)
+══════════════════════════════════ */
+.footer-brand {
+  flex: 0 0 180px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+/* Logo */
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.footer-logo-alent {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--red-accent);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.footer-logo-tag {
+  font-size: 0.52rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red-accent);
+}
+
+/* Stock tickers */
+.footer-stock {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--footer-head);
+  letter-spacing: 0.04em;
+}
+
+.stock-divider {
+  color: var(--footer-muted);
+}
+
+/* Social */
+.footer-social-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}
+
+.social-heading {
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--footer-muted);
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #d2d2d2;
+  color: #555;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, transform 0.2s;
+}
+
+.social-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.social-icon:hover {
+  background: var(--red-accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ══════════════════════════════════
+   VERTICAL DIVIDER
+══════════════════════════════════ */
+.footer-divider-v {
+  width: 1px;
+  align-self: stretch;
+  background: rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════
+   NAV COLUMNS
+══════════════════════════════════ */
+.footer-nav {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.4rem 1.2rem;
+  min-width: 0;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Column heading (caps, dark) */
+.footer-col-heading {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--footer-head);
+  margin-top: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.footer-col-heading:first-child {
+  margin-top: 0;
+}
+
+.footer-col-heading--sub {
+  margin-top: 1.2rem;
+}
+
+/* Nav links */
+.footer-link {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--footer-text);
+  text-decoration: none;
+  line-height: 1.9;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: var(--red-accent);
+}
+
+.footer-subsection {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ══════════════════════════════════
+   HQ COLUMN (right)
+══════════════════════════════════ */
+.footer-hq {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.footer-hq-address {
+  font-size: 0.78rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--footer-text);
+  margin-top: 0.4rem;
+}
+
+.footer-hq-tel {
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--footer-text);
+  margin-top: 0.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.footer-group-sites {
+  margin-top: 1.2rem;
+}
+
+/* ══════════════════════════════════
+   BOTTOM BAR
+══════════════════════════════════ */
+.footer-bottom {
+  margin-top: 3rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1.1rem 0;
+  text-align: right;
+}
+
+.footer-copy {
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--footer-muted);
+  letter-spacing: 0.04em;
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 1024px) {
+  .footer-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-hq {
+    flex: 0 0 160px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer-divider-v {
+    display: none;
+  }
+
+  .footer-brand {
+    flex: none;
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .footer-nav {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-hq {
+    flex: none;
+    width: 100%;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 1.5rem;
+  }
+
+  .footer-bottom {
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .footer-nav {
+    grid-template-columns: 1fr;
+  }
+}

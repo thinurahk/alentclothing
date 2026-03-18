@@ -3,6 +3,10 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import "./app.css";
 import "./BrandSection.css";
 import "./Spanningsection.css";
+import "./CSRSection.css";
+import "./NewsroomSection.css";
+import "./Careerssection.css";
+import Footer from "./Footer";
 
 
 const slides = [
@@ -179,6 +183,7 @@ export default function HeroSection() {
     }
   ];
 
+
   return (
     <>
     <div
@@ -327,7 +332,12 @@ export default function HeroSection() {
                 className={`industry-card ${i === activeCard ? "is-active" : ""}`}
                 key={card.num}
               >
-                <img src={card.image} alt={card.title} className="card-img" />
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="card-img"
+                  style={i === activeCard ? { transform: `scale(${cardImgScale})` } : undefined}
+                />
                 <div className="card-overlay" />
                 <span className="card-num">{card.num}</span>
                 <div className="card-body">
@@ -369,6 +379,255 @@ export default function HeroSection() {
           </button>
         </div>
       </section>
-    </>
+
+      {/* ══ CSR SECTION ══ */}
+      <CSRSection />
+
+      {/* ══ NEWSROOM SECTION ══ */}
+      <NewsroomSection />
+      {/* ══ CAREERS SECTION ══ */}
+      <CareersSection />
+      <Footer />
+    </> 
+  );
+}
+
+const csrSlides = [
+  {
+    id: 1,
+    category: "earning (livelihoods)",
+    desc: "We believe livelihoods create dignity. Our upcoming initiatives aim to turn local skills into sustainable income — enabling families and communities to achieve economic stability, self-reliance, and opportunity.",
+    stats: [
+      { label: "target to support", value: "100+", sub: "individuals through planned livelihood and skill-building programmes" },
+      { label: "aiming for", value: "60% women", sub: "among future programme beneficiaries" },
+    ],
+    image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1400&q=80",
+  },
+  {
+    id: 2,
+    category: "learning (education)",
+    desc: "Education is the foundation of progress. Our future roadmap includes investing in schools, scholarships, and learning centres to give the next generation the tools they need to thrive.",
+    stats: [
+      { label: "projected to support", value: "1000+", sub: "students across planned education programmes" },
+      { label: "goal to build & renovate", value: "10+ schools", sub: "in rural communities" },
+    ],
+    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1400&q=80",
+  },
+  {
+    id: 3,
+    category: "sustaining (environment)",
+    desc: "We are committing to a greener future. Our upcoming sustainability framework focuses on reducing our carbon footprint, conserving water, and introducing sustainable practices throughout our supply chain.",
+    stats: [
+      { label: "target to save", value: "100k+ litres", sub: "of water through upcoming conservation programmes" },
+      { label: "pledging to plant", value: "1,000+ trees", sub: "across our future operational regions" },
+    ],
+    image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1400&q=80",
+  },
+  {
+    id: 4,
+    category: "empowering (women)",
+    desc: "Gender equality drives sustainable communities. We are designing programmes intended to equip women with the skills, confidence, and financial independence needed to lead their own futures.",
+    stats: [
+      { label: "goal to train", value: "100+", sub: "women in vocational and leadership skills" },
+      { label: "targeting over", value: "70% retention", sub: "in future self-help groups" },
+    ],
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1400&q=80",
+  }
+];
+
+function CSRSection() {
+  const [active, setActive] = useState(0);
+  const [animating, setAnimating] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const goTo = (i: number) => {
+    if (animating || i === active) return;
+    setAnimating(true);
+    setActive(i);
+    setTimeout(() => setAnimating(false), 700);
+  };
+
+  const prev = useCallback(() => goTo((active - 1 + csrSlides.length) % csrSlides.length), [active, animating]);
+  const next = useCallback(() => goTo((active + 1) % csrSlides.length), [active, animating]);
+
+  useEffect(() => {
+    timerRef.current = setInterval(next, 5000);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [next]);
+
+  const slide = csrSlides[active];
+
+  return (
+    <section className="csr-section">
+      {/* ── Header ── */}
+      <div className="csr-header">
+        <p className="csr-eyebrow">CORPORATE SOCIAL RESPONSIBILITY</p>
+        <h2 className="csr-title">
+          Giving back to the <em>society</em>
+        </h2>
+        <p className="csr-intro">
+          Alent upholds the belief that businesses thrive by positively impacting society,
+          supporting education, culture, and social renewal through pioneering initiatives
+          long before CSR existed.
+        </p>
+      </div>
+
+      {/* ── Slide Card ── */}
+      <div className="csr-card-wrap">
+        <div className={`csr-card ${animating ? "fading" : ""}`} key={active}>
+          {/* Background image */}
+          <img src={slide.image} alt={slide.category} className="csr-bg-img" />
+          <div className="csr-card-overlay" />
+
+          {/* Content */}
+          <div className="csr-card-content">
+            <div className="csr-card-top">
+              <h3 className="csr-slide-title">{slide.category}</h3>
+              <p className="csr-slide-desc">{slide.desc}</p>
+            </div>
+
+            <div className="csr-stats-row">
+              {slide.stats.map((stat, i) => (
+                <div className="csr-stat" key={i}>
+                  <span className="stat-label">{stat.label}</span>
+                  <span className="stat-value">{stat.value}</span>
+                  <span className="stat-sub">{stat.sub}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Nav inside card */}
+          <div className="csr-card-nav">
+            <button className="csr-nav-arrow" onClick={prev} aria-label="Previous">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            <div className="csr-dots">
+              {csrSlides.map((_, i) => (
+                <button
+                  key={i}
+                  className={`csr-dot ${i === active ? "active" : ""}`}
+                  onClick={() => goTo(i)}
+                  aria-label={`Slide ${i + 1}`}
+                />
+              ))}
+            </div>
+
+            <button className="csr-nav-arrow" onClick={next} aria-label="Next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const news = [
+  {
+    id: 1,
+    title: "ALENT 2026 Spring Summer Collection",
+    excerpt:
+      "ALENT 26 embodies versatile denim for Spring/Summer '26, blending dynamic energy with the season's top trends. Each piece offers casual comfort, active wearability, holiday ease, and bold style.",
+    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?w=900&q=80",
+    size: "large",
+  },
+  {
+    id: 2,
+    title: "Walk for Rahula '26: Official Jersey",
+    excerpt:
+      "Proud manufacturing partners for Rahula College Matara. We delivered high-performance, custom-designed official jerseys that capture the dynamic spirit and pride of the 'Walk for Rahula 26' community milestone.",
+    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&q=80",
+    size: "medium",
+  },
+  {
+    id: 3,
+    title: "Premium Promotional T-Shirts",
+    excerpt:
+      "Sri Lanka's trusted partner for premium promotional t-shirts. Whatever you envision for your brand, we have the expertise to make it happen.",
+    image: "https://images.unsplash.com/photo-1617137968427-85924c800a22?w=900&q=80",
+    size: "medium",
+  },
+];
+
+function NewsroomSection() {
+  return (
+    <section className="newsroom-section">
+      {/* ── Header ── */}
+      <div className="newsroom-header">
+        <div className="newsroom-header-left">
+          <p className="newsroom-eyebrow">UPDATES</p>
+          <h2 className="newsroom-title">Newsroom</h2>
+        </div>
+        <div className="newsroom-header-right">
+          <button className="view-all-btn">view all updates</button>
+        </div>
+      </div>
+
+      {/* ── Cards Grid ── */}
+      <div className="newsroom-grid">
+        {news.map((item) => (
+          <div className={`news-card news-card--${item.size}`} key={item.id}>
+            {/* Background Image */}
+            <img src={item.image} alt={item.title} className="news-img" />
+
+            {/* Dark overlay */}
+            <div className="news-overlay" />
+
+            {/* Content */}
+            <div className="news-body">
+              <h3 className="news-title">{item.title}</h3>
+              <p className="news-excerpt">{item.excerpt}</p>
+              <button className="news-arrow" aria-label="Read more">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M10 8l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Mobile view all ── */}
+      <div className="newsroom-footer-mobile">
+        <button className="view-all-btn">view all updates</button>
+      </div>
+    </section>
+  );
+}
+
+function CareersSection() {
+  return (
+    <section className="careers-section">
+      <div className="careers-card">
+        {/* South-Asian team photo from Unsplash */}
+        <img
+          src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=80"
+          alt="South Asian professional team"
+          className="careers-img"
+        />
+ 
+        {/* Dark overlay — heavier on the left so text is readable */}
+        <div className="careers-overlay" />
+ 
+        {/* Content */}
+        <div className="careers-content">
+          <p className="careers-eyebrow">EMPLOYMENT</p>
+          <h2 className="careers-title">Advancing Careers</h2>
+          <p className="careers-sub">
+            Join a team of dedicated professionals committed to a better tomorrow.
+          </p>
+          <button className="careers-btn">work with us</button>
+        </div>
+      </div>
+    </section>
   );
 }
