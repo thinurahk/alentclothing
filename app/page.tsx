@@ -7,6 +7,7 @@ import "./Spanningsection.css";
 import "./CSRSection.css"; // Not strictly needed here anymore, but keeping just in case
 import "./NewsroomSection.css";
 import "./Careerssection.css";
+import "./scroll-animations.css";
 import NavMenu from "./NavMenu";
 import Footer from "./Footer";
 import CSRSection from "./CSRSection";
@@ -87,6 +88,24 @@ export default function HeroSection() {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [nextSlide]);
+
+  // ── Global scroll-reveal observer ──
+  useEffect(() => {
+    const elements = document.querySelectorAll('[data-reveal]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+    );
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   const slide = slides[current];
 
@@ -202,6 +221,7 @@ export default function HeroSection() {
     <>
     <NavMenu />
     <div
+      id="hero"
       className="hero-root"
       ref={heroRef}
       style={{
@@ -245,7 +265,7 @@ export default function HeroSection() {
       </main>
     </div>
 
-         <section className={`brand-section ${visible ? "in-view" : ""}`} ref={sectionRef}>
+         <section id="about-us" className={`brand-section ${visible ? "in-view" : ""}`} ref={sectionRef}>
  
       {/* ── Giant background letter ── */}
       <div className="bg-letter" aria-hidden="true">A</div> 
@@ -283,9 +303,9 @@ export default function HeroSection() {
     </section>
 
       {/* ══ SPANNING INDUSTRIES SECTION ══ */}
-      <section className="spanning-section">
+      <section id="our-businesses" className="spanning-section" ref={spanningRef}>
         {/* Header */}
-        <div className="spanning-header">
+        <div className="spanning-header" data-reveal="fade-up">
           <p className="spanning-eyebrow">OUR BUSINESSES</p>
           <h2 className="spanning-title">
             Spanning <em>industries</em>

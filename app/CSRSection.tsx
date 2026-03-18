@@ -72,9 +72,9 @@ export default function CSRSection() {
   const slide = csrSlides[active];
 
   return (
-    <section className="csr-section">
+    <section id="csr" className="csr-section">
       {/* ── Header ── */}
-      <div className="csr-header">
+      <div className="csr-header" data-reveal="fade-left">
         <p className="csr-eyebrow">CORPORATE SOCIAL RESPONSIBILITY</p>
         <h2 className="csr-title">
           Giving back to the <em>society</em>
@@ -87,7 +87,7 @@ export default function CSRSection() {
       </div>
 
       {/* ── Slide Card ── */}
-      <div className="csr-card-wrap">
+      <div className="csr-card-wrap" data-reveal="scale-in" data-delay="200">
         <div className={`csr-card ${animating ? "fading" : ""}`} key={active}>
           {/* Background image */}
           <img src={slide.image} alt={slide.category} className="csr-bg-img" />

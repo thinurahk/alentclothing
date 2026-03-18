@@ -3,8 +3,8 @@ import img16 from "../public/img16.jpg";
 
 export default function CareersSection() {
   return (
-    <section className="careers-section">
-      <div className="careers-card">
+    <section id="careers" className="careers-section">
+      <div className="careers-card" data-reveal="scale-in">
         {/* South-Asian team photo from Unsplash */}
         <img
           src={img16.src}

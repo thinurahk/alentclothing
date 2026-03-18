@@ -75,7 +75,7 @@ export default function Contactform() {
   }
 
   return (
-    <div className="cf-wrap">
+    <div id="contact-us" className="cf-wrap">
       <h2 className="cf-heading">WANT MORE DETAILS?</h2>
 
       <form className="cf-form" onSubmit={handleSubmit} noValidate>

@@ -2,16 +2,18 @@ import { useState, useEffect } from "react";
 import "./newNav.css";
 
 const mainLinks = [
-  "Fashioning Possibilities",
-  "About Us",
-  "Our Businesses",
-  "Investors",
-  "Sustainability",
-  "Corporate Social Responsibility",
-  "Careers",
+  { name: "Fashioning Possibilities", href: "#hero" },
+  { name: "About Us", href: "#about-us" },
+  { name: "Our Businesses", href: "#our-businesses" },
+  { name: "Sustainability", href: "#csr" },
+  { name: "Corporate Social Responsibility", href: "#csr" },
+  { name: "Careers", href: "#careers" },
 ];
 
-const bottomLinks = ["Newsroom", "Contact Us"];
+const bottomLinks = [
+  { name: "Newsroom", href: "#newsroom" },
+  { name: "Contact Us", href: "#contact-us" },
+];
 
 export default function NavMenu() {
   const [open, setOpen] = useState(false);
@@ -66,14 +68,14 @@ export default function NavMenu() {
         <ul className="nav-main-links">
           {mainLinks.map((link, i) => (
             <li
-              key={link}
+              key={link.name}
               className={`nav-main-item ${hoveredIndex !== null && hoveredIndex !== i ? "dimmed" : ""}`}
               style={{ "--i": i } as React.CSSProperties}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <a href="#">
-                {link}
+              <a href={link.href} onClick={() => setOpen(false)}>
+                {link.name}
               </a>
             </li>
           ))}
@@ -82,8 +84,8 @@ export default function NavMenu() {
         {/* Bottom row */}
         <div className="nav-bottom-row">
           {bottomLinks.map((link) => (
-            <a key={link} href="#" className="nav-bottom-link">
-              {link}
+            <a key={link.name} href={link.href} className="nav-bottom-link" onClick={() => setOpen(false)}>
+              {link.name}
             </a>
           ))}
         </div>

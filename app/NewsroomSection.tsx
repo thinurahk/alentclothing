@@ -31,9 +31,9 @@ const news = [
 
 export default function NewsroomSection() {
   return (
-    <section className="newsroom-section">
+    <section id="newsroom" className="newsroom-section">
       {/* ── Header ── */}
-      <div className="newsroom-header">
+      <div className="newsroom-header" data-reveal="fade-up">
         <div className="newsroom-header-left">
           <p className="newsroom-eyebrow">UPDATES</p>
           <h2 className="newsroom-title">Newsroom</h2>
@@ -45,8 +45,13 @@ export default function NewsroomSection() {
 
       {/* ── Cards Grid ── */}
       <div className="newsroom-grid">
-        {news.map((item) => (
-          <div className={`news-card news-card--${item.size}`} key={item.id}>
+        {news.map((item, index) => (
+          <div
+            className={`news-card news-card--${item.size}`}
+            key={item.id}
+            data-reveal="fade-up"
+            style={{ transitionDelay: `${index * 0.14 + 0.1}s` }}
+          >
             {/* Background Image */}
             <img src={item.image} alt={item.title} className="news-img" />
 

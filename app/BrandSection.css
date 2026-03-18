@@ -28,17 +28,23 @@
   align-items: center;
   font-family: 'Jost', sans-serif;
 
-  /* ── Cool scroll-in: slides up from below ── */
+  /* ── Massive dramatic scroll-in ── */
+  background: var(--light-bg);
   opacity: 0;
-  transform: translateY(60px);
+  border-radius: 12vw 12vw 0 0; /* Huge curves that flatten out */
+  transform: translateY(120px) scale(0.92);
+  box-shadow: 0 -30px 60px rgba(0,0,0,0.5); /* Deep shadow over the hero */
+  overflow: hidden;
   transition:
-    opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 1.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .brand-section.in-view {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  border-radius: 0;
 }
 
 /* ══════════════════════════════════════
