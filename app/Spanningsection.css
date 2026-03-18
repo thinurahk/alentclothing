@@ -33,9 +33,9 @@
 }
 
 .spanning-eyebrow {
-  font-size: 0.65rem;
+  font-size: 0.95rem;
   font-weight: 400;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--dark-text);
   margin-bottom: 0.5rem;
