@@ -1,19 +1,16 @@
 "use client"
 import { useState, useEffect, useRef, useCallback } from "react";
-import "./app.css";
-import "./newNav.css";
-import "./BrandSection.css";
-import "./Spanningsection.css";
-import "./CSRSection.css"; // Not strictly needed here anymore, but keeping just in case
-import "./NewsroomSection.css";
-import "./Careerssection.css";
-import "./scroll-animations.css";
-import NavMenu from "./NavMenu";
-import Footer from "./Footer";
-import CSRSection from "./CSRSection";
-import NewsroomSection from "./NewsroomSection";
-import Contactform from "./Contactform";
-import CareersSection from "./CareersSection";
+import { useRouter } from "next/navigation";
+import "./styles/app.css";
+import "./styles/BrandSection.css";
+import "./styles/Spanningsection.css";
+import "./styles/scroll-animations.css";
+import NavMenu from "./components/NavMenu/NavMenu";
+import Footer from "./components/Footer/Footer";
+import CSRSection from "./components/CSRSection/CSRSection";
+import NewsroomSection from "./components/NewsroomSection/NewsroomSection";
+import Contactform from "./components/Contactform/Contactform";
+import CareersSection from "./components/CareersSection/CareersSection";
 import img1 from "../public/img1.png";
 import img2 from "../public/img2.png";
 import img3 from "../public/img3.png";
@@ -61,6 +58,7 @@ const slides = [
 ];
 
 export default function HeroSection() {
+  const router = useRouter();
   const [current, setCurrent] = useState(0);
   const [animating, setAnimating] = useState(false);
   const [prevSlide, setPrevSlide] = useState<number | null>(null);
@@ -195,18 +193,22 @@ export default function HeroSection() {
       title: "Textile and Apparel",
       desc: "From innovation in fibre to sustainability in fashion, Alent is powering high-fashion brands across Sri Lanka, all the while delivering unmatched quality and excellence across the garment value chain.",
       image: img8,
+      href: "/textile",
     },
     {
       num: "02",
       title: "Anjas-Retail",
       desc: "Our retail stores deliver a premium shopping experience for men and women, combining Alent's finest offerings under one roof — featuring a full range of shirting, suiting fabrics, and super-premium products.",
       image: img12,
+      href: "/textile",
     },
     {
       num: "03",
       title: "Media & news company",
       desc: "Our in-house design studio blends global trends with local sensibilities, crafting collections that speak to the modern wardrobe. Every stitch is a statement, every fabric a canvas of creativity.",
       image: img7,
+      href: "/media",
+
     },
     {
       num: "04",
@@ -335,7 +337,11 @@ export default function HeroSection() {
                 <div className="card-body">
                   <h3 className="card-title">{card.title}</h3>
                   <p className="card-desc">{card.desc}</p>
-                  <button className="card-arrow" aria-label="Explore">
+                  <button 
+                    className="card-arrow" 
+                    aria-label="Explore" 
+                    onClick={() => card.href ? router.push(card.href) : undefined}
+                  >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                       <circle cx="12" cy="12" r="10" />
                       <path d="M10 8l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />

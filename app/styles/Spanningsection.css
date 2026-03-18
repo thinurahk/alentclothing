@@ -1,0 +1,259 @@
+/* ══════════════════════════════════════════════
+   ALENT — SPANNING INDUSTRIES SECTION
+   Matches the Arvind.com card carousel style
+══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
+
+:root {
+  --red-accent  : #C0392B;
+  --dark-text   : #2a2a2a;
+  --card-w      : clamp(280px, 44vw, 580px);
+  --card-h      : clamp(400px, 68vh, 760px);
+  --gap         : 1.4rem;
+  --radius      : 18px;
+}
+
+/* ── Section Shell ── */
+.spanning-section {
+  position: relative;
+  width: 100%;
+  background: #fff;
+  padding: 5rem 0 4rem;
+  overflow: hidden;
+  font-family: 'Jost', sans-serif;
+}
+
+/* ══════════════════════════════════
+   HEADER
+══════════════════════════════════ */
+.spanning-header {
+  padding: 0 clamp(1.5rem, 6vw, 5rem);
+  margin-bottom: 2.2rem;
+}
+
+.spanning-eyebrow {
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dark-text);
+  margin-bottom: 0.5rem;
+}
+
+.spanning-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  font-weight: 600;
+  color: var(--dark-text);
+  line-height: 1.1;
+}
+
+.spanning-title em {
+  font-style: italic;
+  color: var(--red-accent);
+}
+
+/* ══════════════════════════════════
+   CARDS VIEWPORT + TRACK
+══════════════════════════════════ */
+.cards-viewport {
+  width: 100%;
+  overflow: hidden;
+  padding-left: clamp(1.5rem, 6vw, 5rem);
+}
+
+.cards-track {
+  display: flex;
+  gap: var(--gap);
+  transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+  will-change: transform;
+}
+
+/* ══════════════════════════════════
+   INDIVIDUAL CARD
+══════════════════════════════════ */
+.industry-card {
+  position: relative;
+  flex: 0 0 var(--card-w);
+  height: var(--card-h);
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.industry-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.22);
+}
+
+/* ── Photo fill ── */
+.card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.7s ease;
+}
+
+.industry-card:hover .card-img {
+  transform: scale(1.04);
+}
+
+/* ── Dark gradient from bottom ── */
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.15) 40%,
+    rgba(0, 0, 0, 0.72) 75%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  z-index: 1;
+}
+
+/* ── Big outline number ── */
+.card-num {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.6rem;
+  z-index: 2;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 8vw, 7.5rem);
+  font-weight: 300;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.7);
+  letter-spacing: -0.02em;
+  user-select: none;
+}
+
+/* ── Bottom content ── */
+.card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  padding: 1.8rem 1.8rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.card-desc {
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 340px;
+}
+
+/* ── Circle arrow on card ── */
+.card-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.6);
+  background: none;
+  cursor: pointer;
+  color: #fff;
+  margin-top: 0.3rem;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+}
+
+.card-arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+.card-arrow:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(3px);
+}
+
+/* ══════════════════════════════════
+   NAV ARROWS  (bottom right)
+══════════════════════════════════ */
+.spanning-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  justify-content: flex-end;
+  padding: 1.8rem clamp(1.5rem, 6vw, 5rem) 0;
+}
+
+.nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1.5px solid #aaa;
+  background: none;
+  cursor: pointer;
+  color: var(--dark-text);
+  transition: border-color 0.25s, color 0.25s, transform 0.25s;
+}
+
+.nav-arrow svg {
+  width: 20px;
+  height: 20px;
+}
+
+.nav-arrow:hover:not(.disabled) {
+  border-color: var(--red-accent);
+  color: var(--red-accent);
+  transform: scale(1.05);
+}
+
+.nav-arrow.disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 700px) {
+  :root {
+    --card-w: 80vw;
+    --card-h: 60vw;
+  }
+
+  .cards-viewport {
+    padding-left: 1.2rem;
+  }
+
+  .spanning-header {
+    padding: 0 1.2rem;
+  }
+
+  .spanning-nav {
+    padding: 1.5rem 1.2rem 0;
+  }
+
+  .card-desc {
+    display: none;   /* hide on very small screens */
+  }
+}

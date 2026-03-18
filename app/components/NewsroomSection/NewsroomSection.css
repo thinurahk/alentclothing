@@ -1,0 +1,241 @@
+/* ══════════════════════════════════════════════
+   ALENT — NEWSROOM SECTION
+   Matches Arvind.com 3-card news layout
+══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap');
+
+:root {
+  --red-accent : #C0392B;
+  --dark-text  : #2a2a2a;
+  --mid-text   : #666;
+  --radius-card: 16px;
+}
+
+/* ── Section shell ── */
+.newsroom-section {
+  width: 100%;
+  background: #fff;
+  padding: 4.5rem clamp(1.5rem, 6vw, 5rem) 4.5rem;
+  font-family: 'Jost', sans-serif;
+  box-sizing: border-box;
+}
+
+/* ══════════════════════════════════
+   HEADER ROW
+══════════════════════════════════ */
+.newsroom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2.4rem;
+}
+
+.newsroom-eyebrow {
+  font-size: 0.63rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mid-text);
+  margin-bottom: 0.4rem;
+}
+
+.newsroom-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-weight: 400;
+  color: var(--red-accent);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+/* ── "view all updates" pill button ── */
+.view-all-btn {
+  background: none;
+  border: 1.5px solid #bbb;
+  border-radius: 999px;
+  padding: 0.6rem 1.5rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--dark-text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+}
+
+.view-all-btn:hover {
+  border-color: var(--red-accent);
+  color: var(--red-accent);
+}
+
+/* ══════════════════════════════════
+   GRID — 3 columns, first card larger
+══════════════════════════════════ */
+.newsroom-grid {
+  display: grid;
+  grid-template-columns: 1.45fr 1fr 1fr;
+  gap: 1.2rem;
+  align-items: stretch;
+}
+
+/* ══════════════════════════════════
+   NEWS CARD
+══════════════════════════════════ */
+.news-card {
+  position: relative;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 440px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image zoom on hover */
+.news-card:hover .news-img {
+  transform: scale(1.04);
+}
+
+/* ── Photo fill ── */
+.news-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Gradient overlay — darker at bottom ── */
+.news-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.12) 0%,
+    rgba(0, 0, 0, 0.22) 35%,
+    rgba(0, 0, 0, 0.70) 65%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+  transition: background 0.3s ease;
+}
+
+.news-card:hover .news-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.28) 35%,
+    rgba(0, 0, 0, 0.75) 65%,
+    rgba(0, 0, 0, 0.90) 100%
+  );
+}
+
+/* ── Card content ── */
+.news-body {
+  position: relative;
+  z-index: 3;
+  margin-top: auto;
+  padding: 1.8rem 1.8rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.news-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 1.8vw, 1.75rem);
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+/* Large card gets bigger title */
+.news-card--large .news-title {
+  font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+}
+
+.news-excerpt {
+  font-size: 0.78rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* ── Circle arrow ── */
+.news-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  background: none;
+  cursor: pointer;
+  color: #fff;
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+}
+
+.news-arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+.news-card:hover .news-arrow {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(3px);
+}
+
+/* ══════════════════════════════════
+   MOBILE FOOTER
+══════════════════════════════════ */
+.newsroom-footer-mobile {
+  display: none;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 960px) {
+  .newsroom-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .news-card--large {
+    grid-column: 1 / -1;
+    min-height: 360px;
+  }
+
+  .newsroom-header-right {
+    display: none;
+  }
+
+  .newsroom-footer-mobile {
+    display: flex;
+  }
+}
+
+@media (max-width: 580px) {
+  .newsroom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .news-card {
+    min-height: 320px;
+  }
+
+  .newsroom-section {
+    padding: 3rem 1.2rem;
+  }
+}

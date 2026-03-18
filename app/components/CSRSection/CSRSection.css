@@ -1,0 +1,294 @@
+/* ══════════════════════════════════════════════
+   ALENT — CSR / GIVING BACK SECTION
+   Matches Arvind.com CSR layout
+══════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
+
+:root {
+  --red-accent : #C0392B;
+  --dark-text  : #2a2a2a;
+  --mid-text   : #555;
+  --radius-lg  : 20px;
+}
+
+/* ── Section shell ── */
+.csr-section {
+  width: 100%;
+  background: #fff;
+  padding: 5rem clamp(1.5rem, 6vw, 5rem) 5rem;
+  font-family: 'Jost', sans-serif;
+  box-sizing: border-box;
+}
+
+/* ══════════════════════════════════
+   HEADER
+══════════════════════════════════ */
+.csr-header {
+  max-width: 860px;
+  margin-bottom: 2.4rem;
+}
+
+.csr-eyebrow {
+  font-size: 0.63rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mid-text);
+  margin-bottom: 0.6rem;
+}
+
+.csr-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 400;
+  color: var(--red-accent);
+  line-height: 1.15;
+  margin-bottom: 1.1rem;
+}
+
+.csr-title em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.csr-intro {
+  font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--dark-text);
+  max-width: 780px;
+}
+
+/* ══════════════════════════════════
+   CARD WRAPPER
+══════════════════════════════════ */
+.csr-card-wrap {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* ── The slide card ── */
+.csr-card {
+  position: relative;
+  width: 100%;
+  min-height: clamp(340px, 52vw, 560px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* Slide entrance */
+  animation: csrFadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.csr-card.fading {
+  animation: csrFadeOut 0.35s ease both;
+}
+
+@keyframes csrFadeIn {
+  from { opacity: 0; transform: scale(1.015); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes csrFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ── Photo background ── */
+.csr-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 0;
+  transition: transform 0.7s ease;
+}
+
+/* ── Dark overlay ── */
+.csr-card-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.68) 0%,
+    rgba(0, 0, 0, 0.45) 55%,
+    rgba(0, 0, 0, 0.28) 100%
+  );
+}
+
+/* ══════════════════════════════════
+   CARD CONTENT
+══════════════════════════════════ */
+.csr-card-content {
+  position: relative;
+  z-index: 3;
+  padding: 2.8rem 3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  flex: 1;
+}
+
+.csr-card-top {
+  max-width: 560px;
+}
+
+.csr-slide-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+  font-weight: 300;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+.csr-slide-desc {
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 480px;
+}
+
+/* ── Stats row (two columns with divider) ── */
+.csr-stats-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.csr-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.4rem 2.5rem 0.4rem 0;
+  border-left: 2px solid rgba(255, 255, 255, 0.4);
+  padding-left: 1.2rem;
+  flex: 1;
+}
+
+.csr-stat + .csr-stat {
+  border-left: 2px solid rgba(255, 255, 255, 0.4);
+  margin-left: 1rem;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 300;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.stat-sub {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  max-width: 240px;
+}
+
+/* ══════════════════════════════════
+   NAV — dots + arrows inside card
+══════════════════════════════════ */
+.csr-card-nav {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  padding: 1rem 1.8rem 1.4rem;
+}
+
+.csr-nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.csr-nav-arrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+.csr-nav-arrow:hover {
+  border-color: #fff;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.csr-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.csr-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+}
+
+.csr-dot.active {
+  background: #fff;
+  border-color: #fff;
+  transform: scale(1.2);
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 700px) {
+  .csr-card-content {
+    padding: 2rem 1.5rem 1rem;
+    gap: 1.8rem;
+  }
+
+  .csr-stats-row {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .csr-stat + .csr-stat {
+    margin-left: 0;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+  }
+
+  .csr-section {
+    padding: 3.5rem 1.2rem;
+  }
+}

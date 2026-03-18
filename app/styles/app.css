@@ -1,0 +1,506 @@
+/* ══════════════════════════════════════════
+   ALENT CLOTHING — HERO SECTION
+══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&family=Barlow+Condensed:wght@200;300;400;500;600;700;800&display=swap');
+
+/* ── Reset & Root ── */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-display: 'Barlow Condensed', 'Cormorant Garamond', serif;
+  --font-headline: 'Barlow Condensed', sans-serif;
+  --font-body: 'Jost', sans-serif;
+  --dark: #0A0A0A;
+  --muted: rgba(0, 0, 0, 0.4);
+}
+
+/* ── Root Container ── */
+.hero-root {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 680px;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  overflow: hidden;
+  font-family: var(--font-body);
+}
+
+/* ── Background Blob ── */
+.hero-bg-blob {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 55% 65% at 72% 50%,
+    color-mix(in srgb, var(--accent, #C8A96E) 8%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+  transition: background 0.9s ease;
+  z-index: 0;
+}
+
+/* ══════════════════════════════════
+   HERO MAIN LAYOUT
+══════════════════════════════════ */
+.hero-main {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 0 3.5rem;
+  gap: 2rem;
+}
+
+/* ══════════════════════════════════
+   TEXT BLOCK — slides in from LEFT (after image loads)
+══════════════════════════════════ */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  animation: slideFromLeft 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent, #C8A96E);
+  animation: slideFromLeft 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.6s both;
+}
+
+.tag-line {
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: var(--accent, #C8A96E);
+}
+
+.hero-headline {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-headline);
+  font-size: clamp(2.8rem, 5.8vw, 6rem);
+  font-weight: 100;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: #1a1a1a;
+  text-transform: uppercase;
+}
+
+.headline-line {
+  display: block;
+  opacity: 0;
+  transform: translateX(-60px);
+  animation: headlineLineLeft 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: calc(0.65s + var(--i, 0) * 0.12s);
+}
+
+/* Alternating weight: even lines are bold, odd lines are light */
+.headline-line:nth-child(odd) {
+  font-weight: 200;
+  color: #747373;
+}
+
+.headline-line:nth-child(even) {
+  font-weight: 500;
+  color: #292929;
+}
+
+@keyframes headlineLineLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.hero-sub {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #666666;
+  max-width: 380px;
+  opacity: 0;
+  animation: slideFromLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.9s both;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  opacity: 0;
+  animation: slideFromLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) 1.05s both;
+}
+
+.btn-primary {
+  background: var(--accent, #C8A96E);
+  color: #0A0A0A;
+  border: none;
+  padding: 0.85rem 2.2rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #1a1a1a;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.btn-ghost {
+  background: none;
+  border: none;
+  color: #888888;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.3s ease;
+}
+
+.btn-ghost:hover { color: #1a1a1a; }
+
+/* ══════════════════════════════════
+   VISUAL BLOCK — slides in from RIGHT first
+══════════════════════════════════ */
+.hero-visual {
+  position: relative;
+  height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: visualSlide 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+@keyframes visualSlide {
+  from {
+    opacity: 0;
+    transform: translateX(120px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Decorative Circle — enters from right to left ── */
+.circle-bg {
+  position: absolute;
+  width: 68%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent, #871515) 100%, transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation:
+    circleEnterRight 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both,
+    circlePulse 6s ease-in-out 1.5s infinite;
+  transition: background 0.9s ease;
+}
+
+@keyframes circleEnterRight {
+  from {
+    opacity: 0;
+    transform: translate(60%, -50%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes circlePulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.04); }
+}
+
+.circle-ring {
+  position: absolute;
+  width: 78%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--accent, #C8A96E) 30%, transparent);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation:
+    circleEnterRight 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both,
+    ringRotate 20s linear 1.8s infinite;
+  transition: border-color 0.9s ease;
+}
+
+@keyframes ringRotate {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Small orbit dot on the ring */
+.circle-ring::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent, #C8A96E);
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ── Image ── */
+.hero-img-wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 88%;
+  overflow: hidden;
+}
+
+.hero-img {
+  padding-top: 100px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+  filter: grayscale(8%);
+  transition: filter 0.9s ease;
+}
+
+.img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+  transition: background 0.9s ease;
+}
+
+/* ── Slide Counter Badge ── */
+.float-badge {
+  position: absolute;
+  bottom: 8%;
+  right: 8%;
+  z-index: 5;
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  font-family: var(--font-display);
+}
+
+.badge-num {
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: #2a2a2a;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.badge-slash {
+  font-size: 1rem;
+  color: #aaaaaa;
+}
+
+.badge-total {
+  font-size: 1rem;
+  color: #aaaaaa;
+}
+
+/* ══════════════════════════════════
+   FOOTER CONTROLS
+══════════════════════════════════ */
+.hero-footer {
+  position: absolute;
+  bottom: 2rem;
+  left: 3.5rem;
+  right: 3.5rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Dots ── */
+.slide-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.dot {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.18);
+  transition: all 0.4s ease;
+}
+
+.dot.active {
+  width: 44px;
+  background: var(--accent, #C8A96E);
+}
+
+/* ── Progress Bar ── */
+.progress-bar {
+  flex: 1;
+  max-width: 240px;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.1);
+  margin: 0 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent, #C8A96E);
+  width: 0%;
+  animation: progressAnim 5s linear both;
+  transition: background 0.9s ease;
+}
+
+@keyframes progressAnim {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* ── Scroll Hint ── */
+.scroll-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #aaaaaa;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.scroll-line {
+  width: 32px;
+  height: 1px;
+  background: #cccccc;
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #1a1a1a;
+  transform: translateX(-100%);
+  animation: scrollLineAnim 2s ease-in-out infinite;
+}
+
+@keyframes scrollLineAnim {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media (max-width: 900px) {
+  .hero-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    padding: 6rem 2rem 2rem;
+    gap: 0;
+  }
+
+  .hero-visual {
+    height: 48vh;
+    order: -1;
+  }
+
+  .hero-text {
+    gap: 1rem;
+  }
+
+  .hero-headline {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+  }
+
+  .hero-header {
+    padding: 1.5rem 2rem;
+  }
+
+  .hero-footer {
+    left: 2rem;
+    right: 2rem;
+  }
+
+  .nav-overlay {
+    padding: 3rem 2.5rem;
+  }
+
+  .nav-footer {
+    left: 2.5rem;
+    right: 2.5rem;
+  }
+
+  .nav-item a {
+    font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+
+  .hero-sub {
+    max-width: 100%;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .progress-bar { display: none; }
+  .scroll-hint { display: none; }
+}
