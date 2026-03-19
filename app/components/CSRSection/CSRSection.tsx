@@ -86,56 +86,58 @@ export default function CSRSection() {
         </p>
       </div>
 
-      {/* ── Slide Card ── */}
+      {/* ── Slide Cards ── */}
       <div className="csr-card-wrap" data-reveal="scale-in" data-delay="200">
-        <div className={`csr-card ${animating ? "fading" : ""}`} key={active}>
-          {/* Background image */}
-          <img src={slide.image} alt={slide.category} className="csr-bg-img" />
-          <div className="csr-card-overlay" />
+        {csrSlides.map((slide, i) => (
+          <div className={`csr-card ${i === active ? "active" : ""}`} key={slide.id}>
+            {/* Background image */}
+            <img src={slide.image} alt={slide.category} className="csr-bg-img" />
+            <div className="csr-card-overlay" />
 
-          {/* Content */}
-          <div className="csr-card-content">
-            <div className="csr-card-top">
-              <h3 className="csr-slide-title">{slide.category}</h3>
-              <p className="csr-slide-desc">{slide.desc}</p>
-            </div>
+            {/* Content */}
+            <div className="csr-card-content">
+              <div className="csr-card-top">
+                <h3 className="csr-slide-title">{slide.category}</h3>
+                <p className="csr-slide-desc">{slide.desc}</p>
+              </div>
 
-            <div className="csr-stats-row">
-              {slide.stats.map((stat, i) => (
-                <div className="csr-stat" key={i}>
-                  <span className="stat-label">{stat.label}</span>
-                  <span className="stat-value">{stat.value}</span>
-                  <span className="stat-sub">{stat.sub}</span>
-                </div>
-              ))}
+              <div className="csr-stats-row">
+                {slide.stats.map((stat, idx) => (
+                  <div className="csr-stat" key={idx}>
+                    <span className="stat-label">{stat.label}</span>
+                    <span className="stat-value">{stat.value}</span>
+                    <span className="stat-sub">{stat.sub}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+        ))}
 
-          {/* Nav inside card */}
-          <div className="csr-card-nav">
-            <button className="csr-nav-arrow" onClick={prev} aria-label="Previous">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
+        {/* Nav inside wrap but outside cards */}
+        <div className="csr-card-nav">
+          <button className="csr-nav-arrow" onClick={prev} aria-label="Previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M15 18l-6-6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
 
-            <div className="csr-dots">
-              {csrSlides.map((_, i) => (
-                <button
-                  key={i}
-                  className={`csr-dot ${i === active ? "active" : ""}`}
-                  onClick={() => goTo(i)}
-                  aria-label={`Slide ${i + 1}`}
-                />
-              ))}
-            </div>
-
-            <button className="csr-nav-arrow" onClick={next} aria-label="Next">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
+          <div className="csr-dots">
+            {csrSlides.map((_, i) => (
+              <button
+                key={i}
+                className={`csr-dot ${i === active ? "active" : ""}`}
+                onClick={() => goTo(i)}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
           </div>
+
+          <button className="csr-nav-arrow" onClick={next} aria-label="Next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M9 18l6-6-6-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
         </div>
       </div>
     </section>

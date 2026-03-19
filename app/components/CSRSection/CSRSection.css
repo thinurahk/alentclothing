@@ -66,37 +66,34 @@
 ══════════════════════════════════ */
 .csr-card-wrap {
   width: 100%;
+  position: relative;
+  min-height: clamp(340px, 52vw, 560px);
   border-radius: var(--radius-lg);
   overflow: hidden;
 }
 
 /* ── The slide card ── */
 .csr-card {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  min-height: clamp(340px, 52vw, 560px);
+  height: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  /* Slide entrance */
-  animation: csrFadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  transform: scale(1.015);
 }
 
-.csr-card.fading {
-  animation: csrFadeOut 0.35s ease both;
-}
-
-@keyframes csrFadeIn {
-  from { opacity: 0; transform: scale(1.015); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes csrFadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+.csr-card.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
 }
 
 /* ── Photo background ── */
@@ -207,16 +204,24 @@
 }
 
 /* ══════════════════════════════════
-   NAV — dots + arrows inside card
+   NAV — dots + arrows inside wrap
 ══════════════════════════════════ */
 .csr-card-nav {
-  position: relative;
-  z-index: 4;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 0.6rem;
   padding: 1rem 1.8rem 1.4rem;
+  pointer-events: none;
+}
+
+.csr-nav-arrow, .csr-dot {
+  pointer-events: auto;
 }
 
 .csr-nav-arrow {
