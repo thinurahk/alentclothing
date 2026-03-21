@@ -226,12 +226,12 @@ export default function TextilePageClient() {
         </p>
         {items.map((item, index) => (
           <DraggableCardBody key={index} className={item.className}>
-            <Image
-              src={item.image}
-              alt={`${item.title} manufacturing showcase`}
-              className="pointer-events-none relative z-10 h-40 w-40 sm:h-56 sm:w-56 md:h-80 md:w-80 object-cover transition-all"
+            <img
+              src={typeof item.image === 'string' ? item.image : item.image.src}
+              alt={item.title}
+              className="pointer-events-none relative z-10 h-72 w-72 md:h-80 md:w-80 object-cover"
             />
-            <h3 className="mt-2 md:mt-4 text-center text-base sm:text-xl md:text-2xl font-bold text-neutral-800 dark:text-neutral-200 bg-white/60 md:bg-transparent backdrop-blur-sm md:backdrop-blur-none px-2 py-1 rounded-md md:px-0 md:py-0">
+            <h3 className="mt-3 md:mt-4 text-center text-xl md:text-2xl font-bold text-neutral-700 dark:text-neutral-300 bg-white/70 md:bg-transparent px-2 py-1 md:px-0 md:py-0 rounded-md md:rounded-none">
               {item.title}
             </h3>
           </DraggableCardBody>

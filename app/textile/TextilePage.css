@@ -513,6 +513,9 @@
   .tp-hl-grid        { grid-template-columns: 1fr 1fr; }
   .tp-brands-grid    { grid-template-columns: 1fr; }
   .tp-cap-grid       { grid-template-columns: repeat(2, clamp(240px,70vw,320px)); }
+  .tp-banner .tp-eyebrow { padding-top: 0; }
+  .tp-banner-sub     { padding-top: 0; margin-top: 1rem; }
+  .tp-banner         { height: auto; min-height: 380px; padding: 3rem 0; margin-bottom: 60px; }
 }
 
 @media (max-width: 520px) {
