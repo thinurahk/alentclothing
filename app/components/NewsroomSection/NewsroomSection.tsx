@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import "./NewsroomSection.css";
 import img14 from "../../../public/img14.jpg";
@@ -20,7 +21,7 @@ const news = [
     title: "Walk for Rahula '26: Official Jersey",
     excerpt:
       "Proud manufacturing partners for Rahula College Matara. We delivered high-performance, custom-designed official jerseys that capture the dynamic spirit and pride of the 'Walk for Rahula 26' community milestone.",
-    image: img14.src,
+    image: img14,
     size: "medium",
     href: "/textile",
 
@@ -30,7 +31,7 @@ const news = [
     title: "Premium Promotional T-Shirts",
     excerpt:
       "Sri Lanka's trusted partner for premium promotional t-shirts. Whatever you envision for your brand, we have the expertise to make it happen.",
-    image: img15.src,
+    image: img15,
     size: "medium",
     href: "/textile",
 
@@ -55,14 +56,14 @@ export default function NewsroomSection() {
       {/* ── Cards Grid ── */}
       <div className="newsroom-grid">
         {news.map((item, index) => (
-          <div
+          <article
             className={`news-card news-card--${item.size}`}
             key={item.id}
             data-reveal="fade-up"
             style={{ transitionDelay: `${index * 0.14 + 0.1}s` }}
           >
             {/* Background Image */}
-            <img src={item.image} alt={item.title} className="news-img" />
+            <Image src={item.image} alt={`News update: ${item.title}`} className="news-img" fill style={{ objectFit: 'cover' }} />
 
             {/* Dark overlay */}
             <div className="news-overlay" />
@@ -82,7 +83,7 @@ export default function NewsroomSection() {
                 </svg>
               </button>
             </div>
-          </div>
+          </article>
         ))}
       </div>
 

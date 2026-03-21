@@ -83,7 +83,7 @@ export default function Contactform() {
         {/* Name */}
         <div className={`cf-field ${errors.name ? "has-error" : ""}`}>
           <input
-            type="text" name="name" placeholder="Your Name"
+            type="text" name="name" placeholder="Your Name" aria-label="Your Name"
             value={form.name} onChange={handleChange}
             className="cf-input" autoComplete="off"
           />
@@ -93,7 +93,7 @@ export default function Contactform() {
         {/* Email */}
         <div className={`cf-field ${errors.email ? "has-error" : ""}`}>
           <input
-            type="email" name="email" placeholder="Your Email"
+            type="email" name="email" placeholder="Your Email" aria-label="Your Email"
             value={form.email} onChange={handleChange}
             className="cf-input" autoComplete="off"
           />
@@ -103,7 +103,7 @@ export default function Contactform() {
         {/* Subject */}
         <div className={`cf-field ${errors.subject ? "has-error" : ""}`}>
           <input
-            type="text" name="subject" placeholder="Subject"
+            type="text" name="subject" placeholder="Subject" aria-label="Subject"
             value={form.subject} onChange={handleChange}
             className="cf-input" autoComplete="off"
           />
@@ -113,7 +113,7 @@ export default function Contactform() {
         {/* Message */}
         <div className={`cf-field ${errors.message ? "has-error" : ""}`}>
           <textarea
-            name="message" placeholder="Enter your message…"
+            name="message" placeholder="Enter your message…" aria-label="Message"
             value={form.message} onChange={handleChange}
             className="cf-textarea" rows={6}
           />

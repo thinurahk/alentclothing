@@ -161,12 +161,12 @@ export default function Footer() {
         {/* ── RIGHT: HQ info ── */}
         <div className="footer-hq">
           <p className="footer-col-heading">HEADQUARTERS</p>
-          <p className="footer-hq-address">
-            Matara, Sri Lanka.
-          </p>
-          <p className="footer-hq-tel">Tel: +94 71 235 9109</p>
-          <p className="footer-hq-tel">Email: alent@gmail.com</p>
-          <p className="footer-col-heading footer-col-heading--sub footer-group-sites">
+          <address className="footer-hq-address" style={{ fontStyle: 'normal' }}>
+            Matara, Sri Lanka.<br />
+            Tel: <a href="tel:+94712359109" style={{ color: 'inherit', textDecoration: 'none' }}>+94 71 235 9109</a><br />
+            Email: <a href="mailto:alent@gmail.com" style={{ color: 'inherit', textDecoration: 'none' }}>alent@gmail.com</a>
+          </address>
+          <p className="footer-col-heading footer-col-heading--sub footer-group-sites" style={{ marginTop: '1rem' }}>
             OUR GROUP WEBSITES
           </p>
         </div>
@@ -175,6 +175,7 @@ export default function Footer() {
       {/* ── Bottom bar ── */}
       <div className="footer-bottom">
         <span className="footer-copy">Copyright © 2026, Alent Clothing. All rights reserved.</span>
+        <span className="footer-copy">Designed by Thinura Hewakoon</span>
       </div>
     </footer>
   );

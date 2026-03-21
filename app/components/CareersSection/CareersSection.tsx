@@ -1,4 +1,5 @@
 import "./Careerssection.css";
+import Image from "next/image";
 import img16 from "../../../public/img16.jpg";
 
 export default function CareersSection() {
@@ -6,10 +7,12 @@ export default function CareersSection() {
     <section id="careers" className="careers-section">
       <div className="careers-card" data-reveal="scale-in">
         {/* South-Asian team photo from Unsplash */}
-        <img
-          src={img16.src}
+        <Image
+          src={img16}
           alt="South Asian professional team"
           className="careers-img"
+          fill
+          style={{ objectFit: 'cover' }}
         />
  
         {/* Dark overlay — heavier on the left so text is readable */}

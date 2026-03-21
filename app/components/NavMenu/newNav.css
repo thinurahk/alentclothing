@@ -326,6 +326,7 @@
     bottom: 0;
     width: 100%;
     border-radius: 0;
+    background: rgba(235, 235, 232, 0.98);
   }
 
   .nav-topbar {

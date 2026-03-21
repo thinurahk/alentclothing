@@ -238,8 +238,10 @@
 
   .gp-header {
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.8rem;
     padding: 1.5rem 1.2rem 1.8rem;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .gp-lb-prev { left: 0.5rem; }

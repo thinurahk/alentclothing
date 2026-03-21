@@ -6,6 +6,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@200;300;400;500&display=swap');
+
 :root {
   --red-accent : #C0392B;
   --dark-text  : #2a2a2a;
@@ -42,7 +44,7 @@
 .csr-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2rem, 4vw, 3.4rem);
-  font-weight: 500;
+  font-weight: 400;
   color: var(--red-accent);
   line-height: 1.15;
   margin-bottom: 1.1rem;
@@ -70,6 +72,14 @@
   min-height: clamp(340px, 52vw, 560px);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y; /* allow vertical scroll, intercept horizontal */
+}
+
+.csr-card-wrap:active {
+  cursor: grabbing;
 }
 
 /* ── The slide card ── */
